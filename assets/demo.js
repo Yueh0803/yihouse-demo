@@ -356,7 +356,8 @@
     qa(".menu button").forEach((btn) => {
       btn.addEventListener("click", () => switchSection(btn.dataset.target));
     });
-    switchSection("section-booking");
+    const firstTarget = q(".menu button")?.dataset?.target || "section-booking";
+    switchSection(firstTarget);
   }
 
   function hydrateFromCallback() {
