@@ -233,6 +233,49 @@
     .spot-list { margin: 0; padding-left: 20px; line-height: 1.9; }
     .spot-list a { color: #b84473; }
 
+    .spot-cards {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 10px;
+    }
+
+    .spot-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .spot-card h4 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .spot-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #f7edf1;
+      color: #8a3250;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .spot-actions a {
+      color: #b84473;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
     footer { margin-top: 12px; color: #6a6a6a; font-size: 13px; }
 
     body.theme-forest {
@@ -299,6 +342,7 @@
     @media (max-width: 760px) {
       .photo-grid,
       .grid-2 { grid-template-columns: 1fr; }
+      .spot-cards { grid-template-columns: 1fr; }
       .indicator { margin-left: 0; }
     }
   </style>
@@ -429,19 +473,69 @@
 
         <article class="section" id="section-attractions">
           <h3>Google 週邊 10 大熱門景點（苗栗海線提案）</h3>
-          <p class="lead">以下提供可直接點開的 Google 地圖搜尋連結，方便你在簡報時搭配「住易居、玩周邊」行程提案。</p>
-          <ol class="spot-list">
-            <li><a href="https://maps.google.com/?q=白沙屯拱天宮" target="_blank" rel="noopener">白沙屯拱天宮</a></li>
-            <li><a href="https://maps.google.com/?q=通霄神社" target="_blank" rel="noopener">通霄神社</a></li>
-            <li><a href="https://maps.google.com/?q=好望角苗栗" target="_blank" rel="noopener">苗栗好望角</a></li>
-            <li><a href="https://maps.google.com/?q=台鹽通霄精鹽廠觀光園區" target="_blank" rel="noopener">台鹽通霄觀光園區</a></li>
-            <li><a href="https://maps.google.com/?q=飛牛牧場" target="_blank" rel="noopener">飛牛牧場</a></li>
-            <li><a href="https://maps.google.com/?q=苑裡老街" target="_blank" rel="noopener">苑裡老街</a></li>
-            <li><a href="https://maps.google.com/?q=龍騰斷橋" target="_blank" rel="noopener">龍騰斷橋</a></li>
-            <li><a href="https://maps.google.com/?q=勝興車站" target="_blank" rel="noopener">勝興車站</a></li>
-            <li><a href="https://maps.google.com/?q=三義木雕博物館" target="_blank" rel="noopener">三義木雕博物館</a></li>
-            <li><a href="https://maps.google.com/?q=鯉魚潭水庫苗栗" target="_blank" rel="noopener">鯉魚潭水庫</a></li>
-          </ol>
+          <p class="lead">以下以「白沙屯拱天宮」為中心，整理近中程 10 個熱門景點，補上約略距離、車程與建議停留時間，方便你簡報時直接講行程節奏。</p>
+          <div class="spot-cards">
+            <article class="spot-card">
+              <h4>1. 白沙屯拱天宮</h4>
+              <div class="spot-meta"><span class="chip">0 km</span><span class="chip">車程 0 分</span><span class="chip">停留 40-60 分</span></div>
+              <p class="lead">粉紅超跑信仰核心地標，適合作為第一站與品牌故事開場。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=白沙屯拱天宮" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>2. 通霄神社</h4>
+              <div class="spot-meta"><span class="chip">約 7 km</span><span class="chip">車程 15 分</span><span class="chip">停留 30-50 分</span></div>
+              <p class="lead">高地視角與歷史建築並存，適合拍照與短時散步。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=通霄神社" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>3. 苗栗好望角</h4>
+              <div class="spot-meta"><span class="chip">約 9 km</span><span class="chip">車程 18 分</span><span class="chip">停留 40-60 分</span></div>
+              <p class="lead">海風吹拂與風車海景，可安排夕陽時段。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=好望角苗栗" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>4. 台鹽通霄觀光園區</h4>
+              <div class="spot-meta"><span class="chip">約 8 km</span><span class="chip">車程 15 分</span><span class="chip">停留 45-70 分</span></div>
+              <p class="lead">寓教於樂型景點，親子客群接受度高。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=台鹽通霄精鹽廠觀光園區" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>5. 苑裡老街</h4>
+              <div class="spot-meta"><span class="chip">約 13 km</span><span class="chip">車程 22 分</span><span class="chip">停留 60-90 分</span></div>
+              <p class="lead">在地小吃與街區漫遊，適合午間時段。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=苑裡老街" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>6. 飛牛牧場</h4>
+              <div class="spot-meta"><span class="chip">約 17 km</span><span class="chip">車程 28 分</span><span class="chip">停留 2-3 小時</span></div>
+              <p class="lead">親子互動與草地活動，半日行程首選。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=飛牛牧場" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>7. 龍騰斷橋</h4>
+              <div class="spot-meta"><span class="chip">約 38 km</span><span class="chip">車程 50 分</span><span class="chip">停留 40-60 分</span></div>
+              <p class="lead">歷史遺構代表景點，可搭配山線一日遊。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=龍騰斷橋" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>8. 勝興車站</h4>
+              <div class="spot-meta"><span class="chip">約 40 km</span><span class="chip">車程 55 分</span><span class="chip">停留 60-90 分</span></div>
+              <p class="lead">鐵道文化與老街美食，拍照內容豐富。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=勝興車站" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>9. 三義木雕博物館</h4>
+              <div class="spot-meta"><span class="chip">約 41 km</span><span class="chip">車程 58 分</span><span class="chip">停留 60-80 分</span></div>
+              <p class="lead">工藝文化景點，適合文青與家庭客群。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=三義木雕博物館" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>10. 鯉魚潭水庫</h4>
+              <div class="spot-meta"><span class="chip">約 46 km</span><span class="chip">車程 65 分</span><span class="chip">停留 45-70 分</span></div>
+              <p class="lead">景觀與散步路線完整，可作返程前收尾行程。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=鯉魚潭水庫苗栗" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+          </div>
           <div class="photo-grid" style="margin-top:12px;">
             <article class="photo-card">
               <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1400&q=80" alt="周邊景點照片" loading="lazy">
