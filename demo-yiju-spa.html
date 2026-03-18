@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>易居空間 YIHOUSE - 粉紅超跑庇佑精神 SPA Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:wght@600;700&family=Barlow:wght@400;600;800&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f7f3;
+      --surface: #ffffff;
+      --text: #252525;
+      --muted: #616161;
+      --line: #e6e3dd;
+      --brand: #d65f8f;
+      --brand-2: #c79b43;
+      --accent: #2f6e73;
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 92% -8%, #ffd9e8 0%, rgba(255, 217, 232, 0) 40%),
+        radial-gradient(circle at -10% 108%, #f7ecd6 0%, rgba(247, 236, 214, 0) 33%),
+        var(--bg);
+    }
+
+    .app {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 16px 40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .brand { font-weight: 900; letter-spacing: .4px; }
+
+    .link {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #444;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .hero {
+      border-radius: 24px;
+      color: #fff;
+      background: linear-gradient(120deg, #b84473 0%, #de739f 45%, #2f6e73 100%);
+      padding: 24px;
+      box-shadow: 0 14px 34px rgba(107, 27, 57, 0.28);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 4.2vw, 2.8rem);
+      font-family: "Playfair Display", serif;
+      letter-spacing: .5px;
+    }
+
+    .hero p {
+      margin: 10px 0 0;
+      line-height: 1.8;
+      max-width: 980px;
+      opacity: .95;
+    }
+
+    .theme-switch {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .switch-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.45);
+      background: rgba(255,255,255,.18);
+      color: #fff;
+      padding: 8px 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .switch-btn.main,
+    .switch-btn.active {
+      background: #fff;
+      color: #7c1f47;
+      border-color: #fff;
+    }
+
+    .indicator {
+      margin-left: auto;
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .layout {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 14px;
+    }
+
+    .side {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      height: fit-content;
+      position: sticky;
+      top: 12px;
+    }
+
+    .side h2 {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+
+    .menu { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+
+    .menu button {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: left;
+      font-weight: 700;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .menu button.active {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+    }
+
+    .content { display: grid; gap: 12px; }
+
+    .section {
+      display: none;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 6px 18px rgba(42, 31, 20, 0.08);
+    }
+
+    .section.active { display: block; }
+
+    .section h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+
+    .lead {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .photo-grid,
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .photo-grid,
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card,
+    .photo-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .photo-card { padding: 0; overflow: hidden; }
+
+    .photo-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-meta { padding: 10px; }
+
+    .photo-meta h4 { margin: 0 0 4px; }
+    .photo-meta p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 14px; }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #faecf2;
+      color: #8e2a53;
+      margin-bottom: 8px;
+    }
+
+    .kpi {
+      font-size: 1.6rem;
+      font-weight: 900;
+    }
+
+    .spot-list { margin: 0; padding-left: 20px; line-height: 1.9; }
+    .spot-list a { color: #b84473; }
+
+    footer { margin-top: 12px; color: #6a6a6a; font-size: 13px; }
+
+    body.theme-forest {
+      --brand: #2f6a4f;
+      --brand-2: #c6a04e;
+      --accent: #3f7b80;
+      --line: #dbe7df;
+    }
+
+    body.theme-forest .hero {
+      background: linear-gradient(120deg, #2f6a4f 0%, #4f8870 50%, #3f7b80 100%);
+      box-shadow: 0 14px 34px rgba(29, 72, 55, 0.26);
+    }
+
+    body.theme-forest .switch-btn.main,
+    body.theme-forest .switch-btn.active { color: #24543f; }
+
+    body.theme-block {
+      --brand: #161616;
+      --brand-2: #f2ca3e;
+      --accent: #505050;
+      --line: #dbdbdb;
+      --radius: 10px;
+    }
+
+    body.theme-block {
+      font-family: Barlow, "Noto Sans TC", sans-serif;
+      background: linear-gradient(145deg, #efefef 0%, #f9f9f9 100%);
+    }
+
+    body.theme-block .hero {
+      background: linear-gradient(120deg, #101010 0%, #303030 55%, #5f5f5f 100%);
+      box-shadow: 0 12px 24px rgba(0,0,0,.2);
+    }
+
+    body.theme-block .hero h1 { text-transform: uppercase; letter-spacing: 1px; }
+    body.theme-block .switch-btn.main,
+    body.theme-block .switch-btn.active { color: #111; }
+
+    body.theme-vivir {
+      --brand: #c85461;
+      --brand-2: #5b8fdb;
+      --accent: #d88455;
+      --line: #efdfd6;
+      --radius: 20px;
+      background: linear-gradient(180deg, #fffaf6 0%, #fff2eb 100%);
+    }
+
+    body.theme-vivir .hero {
+      background: linear-gradient(120deg, #c85461 0%, #e28873 50%, #5b8fdb 100%);
+      box-shadow: 0 14px 32px rgba(130, 48, 59, .24);
+    }
+
+    body.theme-vivir .hero h1 { font-family: "Cormorant Garamond", serif; letter-spacing: .8px; }
+    body.theme-vivir .switch-btn.main,
+    body.theme-vivir .switch-btn.active { color: #8b3343; }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .photo-grid,
+      .grid-2 { grid-template-columns: 1fr; }
+      .indicator { margin-left: 0; }
+    }
+  </style>
+</head>
+<body class="theme-vivir">
+  <main class="app">
+    <div class="topbar">
+      <div class="brand">易居空間 YIHOUSE · 粉紅超跑庇佑精神 SPA Demo</div>
+      <a class="link" href="index.html">回展示中心</a>
+    </div>
+
+    <section class="hero">
+      <h1 id="heroTitle">YiHouse Blessing Journey SPA</h1>
+      <p>
+        「易居」與「白沙屯粉紅超跑」的精神連結，是整個品牌的靈魂。
+        此頁完整融合粉紅超跑庇佑精神、詩詞美學與科技實作，並以單頁應用程式（SPA）方式，讓簡報可一頁流暢展示。
+      </p>
+      <div class="theme-switch">
+        <button class="switch-btn main" id="cycleTheme">一鍵切換三風格</button>
+        <button class="switch-btn" data-theme="theme-forest">Forest Calm</button>
+        <button class="switch-btn" data-theme="theme-block">Block Mono</button>
+        <button class="switch-btn active" data-theme="theme-vivir">Taiwan Chic</button>
+        <span class="indicator" id="themeIndicator">目前風格: Taiwan Chic</span>
+      </div>
+    </section>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>簡報段落</h2>
+        <ul class="menu">
+          <li><button class="active" data-target="section-core">品牌理念 (結緣摘要)</button></li>
+          <li><button data-target="section-poetry">五大詩詞切字美學</button></li>
+          <li><button data-target="section-iot">AI 智慧物聯 + Laravel 架構</button></li>
+          <li><button data-target="section-attractions">Google 週邊 10 大景點</button></li>
+        </ul>
+      </aside>
+
+      <section class="content">
+        <article class="section active" id="section-core">
+          <h3>品牌理念 (結緣摘要)</h3>
+          <p class="lead">
+            我已將你提供的品牌核心故事，獨立且醒目地整合為首頁第一段。
+            「易居」代表容易居住、輕鬆無壓，也代表順應自然、隨需變通；
+            這與白沙屯粉紅超跑「無固定路線、哪裡需要就往哪裡去」完全同頻，形成易居空間最具辨識度的靈魂敘事。
+          </p>
+          <div class="photo-grid">
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80" alt="官網首頁風格照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>官網首頁風格照片</h4>
+                <p>首頁採用溫暖迎賓式構圖，從第一屏傳達「庇佑、安心、回家感」的品牌情緒。</p>
+              </div>
+            </article>
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1400&q=80" alt="品牌理念照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>粉紅超跑庇佑精神</h4>
+                <p>由行旅服務延伸到情感照護，將「信念」落地成可感知的入住流程與互動介面。</p>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="section" id="section-poetry">
+          <h3>五大詩詞「切字」美學主題房</h3>
+          <p class="lead">將詩詞意象與字體風格融合到房型敘事，形成房間介紹、照片、設備、注意事項可直接上線的內容結構。</p>
+          <div class="grid-3">
+            <article class="card">
+              <span class="badge">採蓮曲 · 行楷</span>
+              <h4>水韻流光</h4>
+              <p class="lead">湖綠與水紋燈帶，強調晨光感；設備含除濕、智慧窗簾、香氛機。</p>
+            </article>
+            <article class="card">
+              <span class="badge">長恨歌 · 仿宋</span>
+              <h4>月影沉香</h4>
+              <p class="lead">低飽和暖灰與金屬點綴；設備含靜音空調、閱讀燈、獨立音場。</p>
+            </article>
+            <article class="card">
+              <span class="badge">琵琶行 · 明體</span>
+              <h4>弦音入夢</h4>
+              <p class="lead">木作牆面與樂音氛圍；設備含藍牙音響、投影、隔音窗。</p>
+            </article>
+            <article class="card">
+              <span class="badge">早春 · 隸書</span>
+              <h4>春泥新綠</h4>
+              <p class="lead">柔粉與嫩綠調色，明亮親子友善；設備含空氣清淨、童趣夜燈。</p>
+            </article>
+            <article class="card">
+              <span class="badge">送別 · 楷體</span>
+              <h4>遠山靜旅</h4>
+              <p class="lead">沉穩藍灰色系，適合深度放鬆；設備含助眠燈、按摩椅、浴缸。</p>
+            </article>
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1400&q=80" alt="詩詞主題房照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>主題房照片示意（實際地址）</h4>
+                <p>使用可直接存取的實際圖片 URL，便於前端 Demo 與簡報現場穩定展示。</p>
+              </div>
+            </article>
+          </div>
+        </article>
+
+        <article class="section" id="section-iot">
+          <h3>AI 智慧物聯 (Matter / Apple Home) + Laravel 核心架構</h3>
+          <p class="lead">把 AI 管家、IoT 設備控制與後台管理串在同一套服務流程，讓體驗與管理都可擴充。</p>
+          <div class="photo-grid">
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1400&q=80" alt="AI IoT 控制面板照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>AI 智慧物聯</h4>
+                <p>入住者可用語意控制燈光、空調、門鎖與場景，並可串接 Apple Home / Matter 協定。</p>
+              </div>
+            </article>
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" alt="後端架構照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>Laravel 核心架構</h4>
+                <p>以 Laravel 負責會員、訂房、支付、通知、後台權限與報表，前端以 SPA 呈現即時互動。</p>
+              </div>
+            </article>
+          </div>
+          <div class="grid-3" style="margin-top:12px;">
+            <div class="card"><div class="badge">會員認證</div><div class="kpi">Email / 手機 / LINE / Google</div></div>
+            <div class="card"><div class="badge">支付流程</div><div class="kpi">LINE Pay / 綠界 / Stripe</div></div>
+            <div class="card"><div class="badge">維運管理</div><div class="kpi">上傳 / 通知 / 報表 / 後台</div></div>
+          </div>
+        </article>
+
+        <article class="section" id="section-attractions">
+          <h3>Google 週邊 10 大熱門景點（苗栗海線提案）</h3>
+          <p class="lead">以下提供可直接點開的 Google 地圖搜尋連結，方便你在簡報時搭配「住易居、玩周邊」行程提案。</p>
+          <ol class="spot-list">
+            <li><a href="https://maps.google.com/?q=白沙屯拱天宮" target="_blank" rel="noopener">白沙屯拱天宮</a></li>
+            <li><a href="https://maps.google.com/?q=通霄神社" target="_blank" rel="noopener">通霄神社</a></li>
+            <li><a href="https://maps.google.com/?q=好望角苗栗" target="_blank" rel="noopener">苗栗好望角</a></li>
+            <li><a href="https://maps.google.com/?q=台鹽通霄精鹽廠觀光園區" target="_blank" rel="noopener">台鹽通霄觀光園區</a></li>
+            <li><a href="https://maps.google.com/?q=飛牛牧場" target="_blank" rel="noopener">飛牛牧場</a></li>
+            <li><a href="https://maps.google.com/?q=苑裡老街" target="_blank" rel="noopener">苑裡老街</a></li>
+            <li><a href="https://maps.google.com/?q=龍騰斷橋" target="_blank" rel="noopener">龍騰斷橋</a></li>
+            <li><a href="https://maps.google.com/?q=勝興車站" target="_blank" rel="noopener">勝興車站</a></li>
+            <li><a href="https://maps.google.com/?q=三義木雕博物館" target="_blank" rel="noopener">三義木雕博物館</a></li>
+            <li><a href="https://maps.google.com/?q=鯉魚潭水庫苗栗" target="_blank" rel="noopener">鯉魚潭水庫</a></li>
+          </ol>
+          <div class="photo-grid" style="margin-top:12px;">
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1400&q=80" alt="周邊景點照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>週邊行程視覺</h4>
+                <p>將景點內容直接整合到官網/簡報，可提升訂房轉換與停留天數。</p>
+              </div>
+            </article>
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1400&q=80" alt="旅遊地圖照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>Google 地圖導流</h4>
+                <p>每個景點可直接點擊打開地圖，現場演示時可即時導覽路線與距離。</p>
+              </div>
+            </article>
+          </div>
+          <p class="lead" style="margin-top:12px;">參考社群連結：
+            <a href="https://www.facebook.com/groups/1328743441926271/" target="_blank" rel="noopener">Facebook 社團</a> /
+            <a href="https://www.facebook.com/share/p/17pkKKy89G/" target="_blank" rel="noopener">貼文 1</a> /
+            <a href="https://www.facebook.com/share/p/1EFBf52Qhq/" target="_blank" rel="noopener">貼文 2</a>
+          </p>
+        </article>
+      </section>
+    </div>
+
+    <footer>易居空間 SPA Demo · 粉紅超跑庇佑精神 × 詩詞美學 × 科技實作</footer>
+  </main>
+
+  <script>
+    (function () {
+      const order = ["theme-forest", "theme-block", "theme-vivir"];
+      const labels = {
+        "theme-forest": "Forest Calm",
+        "theme-block": "Block Mono",
+        "theme-vivir": "Taiwan Chic"
+      };
+
+      const body = document.body;
+      const cycle = document.getElementById("cycleTheme");
+      const indicator = document.getElementById("themeIndicator");
+      const hero = document.getElementById("heroTitle");
+      const buttons = Array.from(document.querySelectorAll(".switch-btn[data-theme]"));
+
+      function applyTheme(theme) {
+        order.forEach((name) => body.classList.remove(name));
+        body.classList.add(theme);
+        buttons.forEach((btn) => btn.classList.toggle("active", btn.dataset.theme === theme));
+        indicator.textContent = "目前風格: " + labels[theme];
+        if (theme === "theme-block") {
+          hero.textContent = "Urban Blessing Console";
+        } else if (theme === "theme-forest") {
+          hero.textContent = "Blessed Forest Journey";
+        } else {
+          hero.textContent = "YiHouse Blessing Journey SPA";
+        }
+        localStorage.setItem("yihouse_spa_theme", theme);
+      }
+
+      buttons.forEach((btn) => btn.addEventListener("click", () => applyTheme(btn.dataset.theme)));
+      cycle.addEventListener("click", () => {
+        const idx = order.findIndex((name) => body.classList.contains(name));
+        applyTheme(order[(idx + 1) % order.length]);
+      });
+
+      document.querySelectorAll(".menu button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.target;
+          document.querySelectorAll(".menu button").forEach((b) => b.classList.toggle("active", b === btn));
+          document.querySelectorAll(".section").forEach((s) => s.classList.toggle("active", s.id === id));
+        });
+      });
+
+      const saved = localStorage.getItem("yihouse_spa_theme");
+      applyTheme(order.includes(saved) ? saved : "theme-vivir");
+    })();
+  </script>
+</body>
+</html>

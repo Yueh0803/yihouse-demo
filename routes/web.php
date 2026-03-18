@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/demo-spa', function () {
+    return view('demo-spa');
+})->name('demo.spa');
+
 // 認證路由
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisterController::class, 'show'])->name('register');
