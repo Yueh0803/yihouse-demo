@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YIHOUSE Demo - Block Mono</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;800&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/demo.css" />
+  <style>
+    body.theme-block { font-family: Barlow, "Noto Sans TC", sans-serif; }
+    .hero h1 { text-transform: uppercase; letter-spacing: 1px; }
+    .card strong { letter-spacing: .4px; }
+  </style>
+</head>
+<body class="theme-block">
+  <main class="app">
+    <div class="topbar">
+      <div class="brand">YIHOUSE · Block Mono Demo</div>
+      <a class="back-link" href="index.html">Back to Hub</a>
+    </div>
+
+    <section class="hero">
+      <h1>Urban Booking Console</h1>
+      <p>高對比與方塊節奏，強調資訊密度與行動效率。適合快速決策型旅客與企業出差場景。</p>
+      <div class="mode-grid">
+        <div class="mode-item">Bold Typography</div>
+        <div class="mode-item">Fast Decisions</div>
+        <div class="mode-item">Operator Friendly</div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Workflow</h2>
+        <ul class="menu">
+          <li><button class="active" data-target="section-booking">BOOKING UX</button></li>
+          <li><button data-target="section-auth">OAUTH CALLBACK</button></li>
+          <li><button data-target="section-payment">PAYMENT GATEWAYS</button></li>
+          <li><button data-target="section-notify">MAIL EVENTS</button></li>
+          <li><button data-target="section-upload">PHOTO UPLOAD</button></li>
+          <li><button data-target="section-report">ANALYTICS</button></li>
+        </ul>
+      </aside>
+
+      <section class="content">
+        <article class="section active" id="section-booking">
+          <h3>訂房流程 UX 優化</h3>
+          <p class="lead">以「最少點擊完成預訂」為核心，將關鍵資訊壓縮在一屏內，適合手機與平板快速操作。</p>
+          <div class="grid-2">
+            <div class="card">
+              <label>Check-In</label>
+              <input id="checkIn" type="date" />
+            </div>
+            <div class="card">
+              <label>Check-Out</label>
+              <input id="checkOut" type="date" />
+            </div>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div>
+              <label>Guests</label>
+              <select id="guests">
+                <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option>
+              </select>
+            </div>
+            <div class="card"><div class="muted">Nights</div><div class="kpi"><span id="nights">1</span></div></div>
+          </div>
+          <div class="inline-btns" style="margin-top:10px;">
+            <label class="card"><input id="addonBreakfast" type="checkbox" style="width:auto; margin-right:8px;"> Breakfast</label>
+            <label class="card"><input id="addonLateCheckout" type="checkbox" style="width:auto; margin-right:8px;"> Late Check-out</label>
+          </div>
+          <div class="card" style="margin-top:10px;">
+            <div class="row">
+              <div>Base</div><div style="text-align:right;">NT$ <span id="priceBase">0</span></div>
+              <div>Breakfast</div><div style="text-align:right;">NT$ <span id="priceBreakfast">0</span></div>
+              <div>Late</div><div style="text-align:right;">NT$ <span id="priceLate">0</span></div>
+              <div><strong>Total</strong></div><div style="text-align:right;"><strong>NT$ <span id="priceTotal">0</span></strong></div>
+            </div>
+          </div>
+          <button id="bookingSubmit" class="btn" style="margin-top:10px;">CREATE ORDER</button>
+        </article>
+
+        <article class="section" id="section-auth">
+          <h3>Google / LINE OAuth Callback</h3>
+          <p class="lead">按下登入後將跳轉 callback，回寫 token 並導回此頁。此流程可直接替換成正式 OAuth endpoint。</p>
+          <div class="inline-btns">
+            <button id="googleOAuth" class="btn">Google</button>
+            <button id="lineOAuth" class="btn secondary">LINE</button>
+            <button id="logoutBtn" class="btn ghost">LOGOUT</button>
+            <span id="authStatus" class="status warn">Not Login</span>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div class="card"><strong>Session</strong><pre id="authJson" style="white-space:pre-wrap;">{}</pre></div>
+            <div class="card"><strong>Callback Log</strong><pre id="oauthCallbackLog" style="white-space:pre-wrap;">No callback yet.</pre></div>
+          </div>
+        </article>
+
+        <article class="section" id="section-payment">
+          <h3>Gateway UX (LINE Pay / ECPay / Stripe)</h3>
+          <div class="grid-3">
+            <div class="card"><div class="badge">LINE Pay</div><p class="muted">Mobile First</p><button id="payLine" class="btn">Pay</button></div>
+            <div class="card"><div class="badge">ECPay</div><p class="muted">Local Ecosystem</p><button id="payEcpay" class="btn warn">Redirect</button></div>
+            <div class="card"><div class="badge">Stripe</div><p class="muted">Global Card</p><button id="payStripe" class="btn secondary">Checkout</button></div>
+          </div>
+          <div class="card" style="margin-top:10px;">
+            <div>Order: <strong id="currentOrderId">N/A</strong></div>
+            <div>Amount: NT$ <strong id="currentAmount">0</strong></div>
+            <pre id="gatewayResult" style="white-space:pre-wrap;">No payment action</pre>
+          </div>
+        </article>
+
+        <article class="section" id="section-notify">
+          <h3>郵件事件通知</h3>
+          <div id="mailPreview"></div>
+        </article>
+
+        <article class="section" id="section-upload">
+          <h3>房間照片上傳</h3>
+          <div id="dropzone" class="dropzone">Drop images here or <label for="uploadInput" style="display:inline; color:var(--brand); cursor:pointer;">browse</label><input id="uploadInput" type="file" multiple accept="image/*" style="display:none;"></div>
+          <div class="progress" style="margin-top:10px;"><span id="uploadProgress"></span></div>
+          <div id="previewList" class="preview-list"></div>
+        </article>
+
+        <article class="section" id="section-report">
+          <h3>Revenue & Booking Trend</h3>
+          <div class="grid-3">
+            <div class="card"><div class="muted">Orders</div><div id="kpiOrders" class="kpi">0</div></div>
+            <div class="card"><div class="muted">Paid</div><div id="kpiPaid" class="kpi">0</div></div>
+            <div class="card"><div class="muted">Revenue</div><div id="kpiRevenue" class="kpi">0</div></div>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div class="chart-wrap"><strong>Bookings</strong><canvas id="ordersChart" width="480" height="230"></canvas></div>
+            <div class="chart-wrap"><strong>Revenue</strong><canvas id="revenueChart" width="480" height="230"></canvas></div>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <footer class="note">Block Mono Demo · Static Rendering on GitHub Pages</footer>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="assets/demo.js"></script>
+</body>
+</html>

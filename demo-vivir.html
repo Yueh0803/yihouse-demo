@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YIHOUSE Demo - Taiwan Chic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/demo.css" />
+  <style>
+    body.theme-vivir .hero h1 { font-family: "Cormorant Garamond", serif; letter-spacing: .6px; }
+  </style>
+</head>
+<body class="theme-vivir">
+  <main class="app">
+    <div class="topbar">
+      <div class="brand">YIHOUSE · Taiwan Chic Demo</div>
+      <a class="back-link" href="index.html">回展示中心</a>
+    </div>
+
+    <section class="hero">
+      <h1>Home-like Stay Experience</h1>
+      <p>以生活感與親和力為核心，使用柔暖色調與清楚步驟，讓家庭型客群快速理解訂房與支付流程。</p>
+      <div class="mode-grid">
+        <div class="mode-item">溫潤品牌語調</div>
+        <div class="mode-item">家庭客群友善</div>
+        <div class="mode-item">步驟導引清楚</div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>Demo 功能</h2>
+        <ul class="menu">
+          <li><button class="active" data-target="section-booking">訂房流程 UX</button></li>
+          <li><button data-target="section-auth">第三方登入 callback</button></li>
+          <li><button data-target="section-payment">支付閘道整合</button></li>
+          <li><button data-target="section-notify">郵件通知渲染</button></li>
+          <li><button data-target="section-upload">房間照片上傳</button></li>
+          <li><button data-target="section-report">營收與趨勢報表</button></li>
+        </ul>
+      </aside>
+
+      <section class="content">
+        <article class="section active" id="section-booking">
+          <h3>完善訂房流程 UX</h3>
+          <p class="lead">將日期、房客、加購選項與總金額放在同一視覺區塊，減少切頁中斷，提升完成率。</p>
+          <div class="grid-2">
+            <div>
+              <label>入住日期</label>
+              <input id="checkIn" type="date" />
+            </div>
+            <div>
+              <label>退房日期</label>
+              <input id="checkOut" type="date" />
+            </div>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div>
+              <label>入住人數</label>
+              <select id="guests">
+                <option value="1">1 人</option>
+                <option value="2" selected>2 人</option>
+                <option value="3">3 人</option>
+                <option value="4">4 人</option>
+              </select>
+            </div>
+            <div class="card"><div class="muted">夜數</div><div class="kpi"><span id="nights">1</span> 晚</div></div>
+          </div>
+          <div class="inline-btns" style="margin-top:10px;">
+            <label class="card"><input id="addonBreakfast" type="checkbox" style="width:auto; margin-right:8px;"/> 早餐加購</label>
+            <label class="card"><input id="addonLateCheckout" type="checkbox" style="width:auto; margin-right:8px;"/> 延後退房</label>
+          </div>
+          <div class="card" style="margin-top:10px;">
+            <div class="row">
+              <div>房費</div><div style="text-align:right;">NT$ <span id="priceBase">0</span></div>
+              <div>早餐</div><div style="text-align:right;">NT$ <span id="priceBreakfast">0</span></div>
+              <div>延退</div><div style="text-align:right;">NT$ <span id="priceLate">0</span></div>
+              <div><strong>總金額</strong></div><div style="text-align:right;"><strong>NT$ <span id="priceTotal">0</span></strong></div>
+            </div>
+          </div>
+          <button id="bookingSubmit" class="btn" style="margin-top:10px;">確認訂房並前往付款</button>
+        </article>
+
+        <article class="section" id="section-auth">
+          <h3>Google OAuth 與 LINE 登入 callback</h3>
+          <p class="lead">示範 callback URL 回傳參數解析、token 暫存、前端登入狀態同步。</p>
+          <div class="inline-btns">
+            <button id="googleOAuth" class="btn">Google 登入</button>
+            <button id="lineOAuth" class="btn secondary">LINE 登入</button>
+            <button id="logoutBtn" class="btn ghost">清除登入</button>
+            <span id="authStatus" class="status warn">尚未登入</span>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div class="card"><strong>登入資料</strong><pre id="authJson" style="white-space:pre-wrap;">{}</pre></div>
+            <div class="card"><strong>Callback 記錄</strong><pre id="oauthCallbackLog" style="white-space:pre-wrap;">尚未接收 callback。</pre></div>
+          </div>
+        </article>
+
+        <article class="section" id="section-payment">
+          <h3>金流 Demo: LINE Pay / 綠界 / Stripe</h3>
+          <p class="lead">先完成前端可用流程與 payload 格式，後續只需替換 API endpoint 與簽章邏輯。</p>
+          <div class="grid-3">
+            <div class="card"><div class="badge">LINE Pay</div><p class="muted">手機快速付款</p><button id="payLine" class="btn">LINE Pay</button></div>
+            <div class="card"><div class="badge">綠界 ECPay</div><p class="muted">台灣常見支付</p><button id="payEcpay" class="btn warn">綠界付款</button></div>
+            <div class="card"><div class="badge">Stripe</div><p class="muted">信用卡支付</p><button id="payStripe" class="btn secondary">Stripe Checkout</button></div>
+          </div>
+          <div class="card" style="margin-top:10px;">
+            <div>訂單編號: <strong id="currentOrderId">尚未建立</strong></div>
+            <div>應付金額: NT$ <strong id="currentAmount">0</strong></div>
+            <pre id="gatewayResult" style="white-space:pre-wrap;">尚未觸發支付</pre>
+          </div>
+        </article>
+
+        <article class="section" id="section-notify">
+          <h3>郵件通知</h3>
+          <p class="lead">包含「訂單確認通知」與「付款成功通知」兩個模板，方便串接 Mail API。</p>
+          <div id="mailPreview"></div>
+        </article>
+
+        <article class="section" id="section-upload">
+          <h3>房間照片上傳管理</h3>
+          <p class="lead">支援多圖上傳、拖曳體驗與縮圖預覽，適合後台房間介紹 / 設備介紹維護。</p>
+          <div id="dropzone" class="dropzone">把圖片拖曳到這裡，或 <label for="uploadInput" style="display:inline; color:var(--brand); cursor:pointer;">點我上傳</label>
+            <input id="uploadInput" type="file" multiple accept="image/*" style="display:none;" />
+          </div>
+          <div class="progress" style="margin-top:10px;"><span id="uploadProgress"></span></div>
+          <div id="previewList" class="preview-list"></div>
+        </article>
+
+        <article class="section" id="section-report">
+          <h3>營收統計與訂房趨勢</h3>
+          <p class="lead">以 KPI + 趨勢圖同屏呈現，讓營運與財務能快速判讀。</p>
+          <div class="grid-3">
+            <div class="card"><div class="muted">總訂單</div><div id="kpiOrders" class="kpi">0</div></div>
+            <div class="card"><div class="muted">已付款</div><div id="kpiPaid" class="kpi">0</div></div>
+            <div class="card"><div class="muted">營收</div><div id="kpiRevenue" class="kpi">0</div></div>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div class="chart-wrap"><strong>訂房趨勢</strong><canvas id="ordersChart" width="480" height="230"></canvas></div>
+            <div class="chart-wrap"><strong>營收趨勢</strong><canvas id="revenueChart" width="480" height="230"></canvas></div>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <footer class="note">Taiwan Chic Demo · Static Rendering on GitHub Pages</footer>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="assets/demo.js"></script>
+</body>
+</html>

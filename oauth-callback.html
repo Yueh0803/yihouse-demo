@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OAuth Callback Demo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      background: #f4f7f6;
+      color: #1f2421;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .box {
+      width: min(760px, 100%);
+      background: #fff;
+      border: 1px solid #dce5df;
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(13, 31, 27, 0.1);
+    }
+    h1 { margin: 0 0 8px; }
+    p { color: #586360; line-height: 1.7; }
+    pre {
+      border: 1px solid #dce5df;
+      background: #f7fbfa;
+      border-radius: 10px;
+      padding: 12px;
+      overflow: auto;
+    }
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #fff;
+      background: #1b6a6f;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main class="box">
+    <h1>第三方登入 Callback (Demo)</h1>
+    <p>
+      這頁模擬 OAuth callback：接收 provider、code、state，產出 demo token，回寫 localStorage 後導回 UX 頁面。
+    </p>
+    <pre id="json"></pre>
+    <a id="back" href="demo-forest.html">返回 Demo</a>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const provider = params.get("provider") || "unknown";
+      const code = params.get("code") || "none";
+      const state = params.get("state") || "none";
+      const result = {
+        provider,
+        code,
+        state,
+        token: provider + "_token_" + Math.random().toString(36).slice(2, 12),
+        user: {
+          id: provider + "_u_" + Date.now().toString().slice(-6),
+          name: provider === "line" ? "LINE 使用者" : "Google 使用者",
+          email: provider === "line" ? "line-user@yihouse.demo" : "google-user@yihouse.demo"
+        },
+        callbackAt: new Date().toISOString()
+      };
+
+      localStorage.setItem("yihouse_auth", JSON.stringify(result));
+      localStorage.setItem("yihouse_callback_result", JSON.stringify(result));
+      document.getElementById("json").textContent = JSON.stringify(result, null, 2);
+
+      const ref = document.referrer;
+      const fallback = "demo-forest.html";
+      const target = (ref && /demo-(forest|block|vivir)\.html$/.test(ref)) ? ref : fallback;
+      document.getElementById("back").setAttribute("href", target);
+
+      setTimeout(function () {
+        window.location.href = target;
+      }, 1200);
+    })();
+  </script>
+</body>
+</html>

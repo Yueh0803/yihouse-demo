@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YIHOUSE Demo - Forest Calm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/demo.css" />
+</head>
+<body class="theme-forest">
+  <main class="app">
+    <div class="topbar">
+      <div class="brand">YIHOUSE · Forest Calm Demo</div>
+      <a class="back-link" href="index.html">回展示中心</a>
+    </div>
+
+    <section class="hero">
+      <h1 style="font-family: Playfair Display, serif;">Forest Calm Booking Journey</h1>
+      <p>慢節奏旅宿體驗：先感受空間，再完成預訂。這個版本將訂房、登入、支付、通知、上傳、報表整合為一條順暢動線。</p>
+      <div class="mode-grid">
+        <div class="mode-item">自然敘事導向</div>
+        <div class="mode-item">柔和視覺層次</div>
+        <div class="mode-item">低壓決策流程</div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <aside class="side">
+        <h2>流程導覽</h2>
+        <ul class="menu">
+          <li><button class="active" data-target="section-booking">1) 訂房流程 UX</button></li>
+          <li><button data-target="section-auth">2) Google / LINE Callback</button></li>
+          <li><button data-target="section-payment">3) LINE Pay / 綠界 / Stripe</button></li>
+          <li><button data-target="section-notify">4) 郵件通知</button></li>
+          <li><button data-target="section-upload">5) 房間照片上傳</button></li>
+          <li><button data-target="section-report">6) 營收與趨勢報表</button></li>
+        </ul>
+      </aside>
+
+      <section class="content">
+        <article class="section active" id="section-booking">
+          <h3>訂房流程優化</h3>
+          <p class="lead">先給使用者可見的價格拆解，避免結帳才發現加購費用。每一步都可預期、可回頭。</p>
+          <div class="row">
+            <div>
+              <label>入住日期</label>
+              <input id="checkIn" type="date" />
+            </div>
+            <div>
+              <label>退房日期</label>
+              <input id="checkOut" type="date" />
+            </div>
+          </div>
+          <div class="row" style="margin-top:10px;">
+            <div>
+              <label>入住人數</label>
+              <select id="guests">
+                <option value="1">1 人</option>
+                <option value="2" selected>2 人</option>
+                <option value="3">3 人</option>
+                <option value="4">4 人</option>
+              </select>
+            </div>
+            <div class="card">
+              <div class="muted">入住夜數</div>
+              <div class="kpi"><span id="nights">1</span> 晚</div>
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-top:10px;">
+            <label class="card"><input id="addonBreakfast" type="checkbox" style="width:auto; margin-right:8px;" /> 加購早餐 (每人每晚 NT$180)</label>
+            <label class="card"><input id="addonLateCheckout" type="checkbox" style="width:auto; margin-right:8px;" /> 延後退房 (固定 NT$500)</label>
+          </div>
+
+          <div class="card" style="margin-top:10px;">
+            <div class="row">
+              <div>房價小計</div><div style="text-align:right;">NT$ <span id="priceBase">0</span></div>
+              <div>早餐加購</div><div style="text-align:right;">NT$ <span id="priceBreakfast">0</span></div>
+              <div>延後退房</div><div style="text-align:right;">NT$ <span id="priceLate">0</span></div>
+            </div>
+            <hr style="border:none; border-top:1px solid var(--line); margin:10px 0;">
+            <div class="row">
+              <strong>總金額</strong><strong style="text-align:right;">NT$ <span id="priceTotal">0</span></strong>
+            </div>
+          </div>
+
+          <div class="inline-btns" style="margin-top:10px;">
+            <button id="bookingSubmit" class="btn">建立訂單並前往付款</button>
+            <span class="status ok">UX: 價格即時計算</span>
+          </div>
+        </article>
+
+        <article class="section" id="section-auth">
+          <h3>第三方登入 Callback</h3>
+          <p class="lead">在純靜態環境模擬 OAuth callback 回流，檢視 provider、code、token 與登入狀態更新。</p>
+          <div class="inline-btns">
+            <button id="googleOAuth" class="btn">Google Login</button>
+            <button id="lineOAuth" class="btn secondary">LINE Login</button>
+            <button id="logoutBtn" class="btn ghost">登出</button>
+            <span id="authStatus" class="status warn">尚未登入</span>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div class="card"><strong>Auth Session</strong><pre id="authJson" style="white-space:pre-wrap;">{}</pre></div>
+            <div class="card"><strong>Latest Callback</strong><pre id="oauthCallbackLog" style="white-space:pre-wrap;">尚未接收 callback。</pre></div>
+          </div>
+        </article>
+
+        <article class="section" id="section-payment">
+          <h3>支付閘道整合 Demo</h3>
+          <p class="lead">展示 LINE Pay、綠界、Stripe 的前端結帳體驗與 callback payload 結構，方便後續接真實金流。</p>
+          <div class="grid-3">
+            <div class="card"><div class="badge">LINE Pay</div><p class="muted">行動支付流暢動線</p><button id="payLine" class="btn">立即支付</button></div>
+            <div class="card"><div class="badge">綠界 ECPay</div><p class="muted">在地常用支付整合</p><button id="payEcpay" class="btn warn">送出到綠界</button></div>
+            <div class="card"><div class="badge">Stripe</div><p class="muted">國際信用卡流程</p><button id="payStripe" class="btn secondary">Pay with Stripe</button></div>
+          </div>
+          <div class="card" style="margin-top:10px;">
+            <div>目前訂單: <strong id="currentOrderId">尚未建立</strong></div>
+            <div>應付金額: NT$ <strong id="currentAmount">0</strong></div>
+            <pre id="gatewayResult" style="white-space:pre-wrap; margin:8px 0 0;">尚未觸發支付</pre>
+          </div>
+        </article>
+
+        <article class="section" id="section-notify">
+          <h3>郵件通知</h3>
+          <p class="lead">同一份資料渲染兩種通知：訂房確認、付款成功。可直接對接 Email API。</p>
+          <div id="mailPreview"></div>
+        </article>
+
+        <article class="section" id="section-upload">
+          <h3>房間照片上傳</h3>
+          <p class="lead">支援拖拉與點擊選檔，多圖預覽 + 假上傳進度，便於先做管理流程驗證。</p>
+          <div id="dropzone" class="dropzone">拖曳照片到這裡，或 <label for="uploadInput" style="display:inline; color:var(--brand); cursor:pointer;">點擊選擇</label>
+            <input id="uploadInput" type="file" accept="image/*" multiple style="display:none;" />
+          </div>
+          <div class="progress" style="margin-top:10px;"><span id="uploadProgress"></span></div>
+          <div id="previewList" class="preview-list"></div>
+        </article>
+
+        <article class="section" id="section-report">
+          <h3>報表模塊</h3>
+          <p class="lead">營收統計 + 訂房趨勢雙圖，採可讀性優先設計，適合在管理後台快速決策。</p>
+          <div class="grid-3">
+            <div class="card"><div class="muted">訂單數</div><div class="kpi" id="kpiOrders">0</div></div>
+            <div class="card"><div class="muted">已付款</div><div class="kpi" id="kpiPaid">0</div></div>
+            <div class="card"><div class="muted">營收 (NT$)</div><div class="kpi" id="kpiRevenue">0</div></div>
+          </div>
+          <div class="grid-2" style="margin-top:10px;">
+            <div class="chart-wrap"><strong>訂房趨勢</strong><canvas id="ordersChart" width="480" height="230"></canvas></div>
+            <div class="chart-wrap"><strong>營收趨勢</strong><canvas id="revenueChart" width="480" height="230"></canvas></div>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <footer class="note">Forest Calm Demo · Static Rendering on GitHub Pages</footer>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="assets/demo.js"></script>
+</body>
+</html>
