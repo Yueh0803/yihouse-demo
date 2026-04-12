@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>易居空間 YIHOUSE - 品牌理念與智慧架構</title>
+    <title>易居空間 YIHOUSE - 品牌理念・2026 活動主題與智慧架構</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* 基礎字體 */
@@ -138,6 +138,45 @@
             width: 100%;
             opacity: 0.6;
         }
+
+        .event-shell {
+            background: radial-gradient(circle at 15% 20%, #fff9fa 0%, #fdf2f4 38%, #fff7e8 100%);
+            border: 1px solid #f2d7de;
+        }
+
+        .event-ribbon {
+            background: linear-gradient(120deg, #e65c7b 0%, #d44968 58%, #b53f58 100%);
+        }
+
+        .event-glow {
+            box-shadow: 0 10px 30px rgba(230, 92, 123, 0.18);
+        }
+
+        .event-pill {
+            background-color: #fff;
+            border: 1px solid #f2d7de;
+        }
+
+        .event-pulse {
+            animation: eventPulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes eventPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(230, 92, 123, 0.32);
+            }
+
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 14px rgba(230, 92, 123, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(230, 92, 123, 0);
+            }
+        }
     </style>
 </head>
 
@@ -158,6 +197,8 @@
                 <nav class="hidden md:flex space-x-2">
                     <button onclick="switchTab('overview')" id="btn-overview"
                         class="nav-btn active px-4 py-2 rounded-full text-sm text-matsu-pink">品牌理念</button>
+                    <button onclick="switchTab('festival')" id="btn-festival"
+                        class="nav-btn px-4 py-2 rounded-full text-sm text-matsu-pink">2026 活動主題</button>
                     <button onclick="switchTab('rooms')" id="btn-rooms"
                         class="nav-btn px-4 py-2 rounded-full text-sm text-matsu-pink">詩詞切字主題房</button>
                     <button onclick="switchTab('smarthome')" id="btn-smarthome"
@@ -224,6 +265,95 @@
                         <h3 class="text-lg font-bold text-center mb-2 text-[#3d3d3d]">隨需應變的管家 (Tech)</h3>
                         <p class="text-sm text-gray-600 text-justify">導入 Apple Home 與 Matter 協定，結合 AI 語意分析。無論是調光或冷氣，AI
                             管家都能如粉紅超跑般「哪裡需要溫暖就往哪裡去」，精準庇佑旅人需求。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1.5: 2026 Event Theme -->
+        <section id="sec-festival" class="fade-in hidden">
+            <div class="event-shell rounded-2xl p-8 md:p-10 relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-52 h-52 rounded-full bg-[#ffdce6] opacity-45"></div>
+                <div class="absolute -bottom-24 -left-20 w-64 h-64 rounded-full bg-[#ffeac1] opacity-35"></div>
+
+                <div class="relative z-10">
+                    <div class="inline-flex items-center event-ribbon text-white px-5 py-2 rounded-full text-sm tracking-widest mb-4 event-glow">
+                        2026 全新企劃 · 粉紅超跑祈福共創季
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#3d3d3d] leading-tight mb-4">
+                        今年主題：<span class="text-matsu-pink">順路有光，停靠有福</span>
+                    </h2>
+
+                    <p class="text-gray-700 leading-relaxed text-lg max-w-4xl mb-8">
+                        以白沙屯媽祖「無固定路線、哪裡需要就往哪裡去」的精神，策展 2026 年易居年度活動。
+                        我們把每一段旅程化為可被感知的互動：入住是一段巡安，房間是一座停靠站，
+                        AI 管家則是即時遞上暖光與平安提醒的隨行轎班。
+                    </p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-2xl border border-pink-100 p-6 shadow-sm">
+                            <div class="text-3xl mb-3">🗺️</div>
+                            <h3 class="font-bold text-[#3d3d3d] mb-2">主題路線：巡安地圖</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                每日解鎖「順路任務」，像粉紅超跑般依旅人需求彈性推薦行程，從在地早餐到夜間散步點位，形成個人祈福動線。
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-2xl border border-[#efdca7] p-6 shadow-sm">
+                            <div class="text-3xl mb-3">🧧</div>
+                            <h3 class="font-bold text-[#3d3d3d] mb-2">入住儀式：福籤房卡</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                今年新增「福籤房卡」機制，入住時隨機抽取祝詞與字體意象，對應五大主題房，讓每次開門都像一段專屬起駕。
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-2xl border border-[#e9d6f0] p-6 shadow-sm">
+                            <div class="text-3xl mb-3">🌙</div>
+                            <h3 class="font-bold text-[#3d3d3d] mb-2">夜間體驗：護光模式</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                每晚 21:00 後可啟用「護光模式」，AI 依作息自動微調照明與空調，營造如遶境夜行般穩定安心的節奏。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/90 backdrop-blur rounded-2xl border border-[#f2d7de] p-6 md:p-8">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                            <h3 class="text-2xl font-bold text-[#3d3d3d]">活動倒數與現場參與</h3>
+                            <span class="event-pill text-xs tracking-widest px-3 py-1 rounded-full text-matsu-pink font-bold">限時企劃 2026.05 - 2026.12</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="countdown-grid">
+                            <div class="bg-[#fdf2f4] rounded-xl p-4 text-center border border-pink-100">
+                                <div id="cd-days" class="text-3xl font-bold text-matsu-pink">--</div>
+                                <div class="text-xs text-gray-500 mt-1">天</div>
+                            </div>
+                            <div class="bg-[#fdf2f4] rounded-xl p-4 text-center border border-pink-100">
+                                <div id="cd-hours" class="text-3xl font-bold text-matsu-pink">--</div>
+                                <div class="text-xs text-gray-500 mt-1">時</div>
+                            </div>
+                            <div class="bg-[#fdf2f4] rounded-xl p-4 text-center border border-pink-100">
+                                <div id="cd-mins" class="text-3xl font-bold text-matsu-pink">--</div>
+                                <div class="text-xs text-gray-500 mt-1">分</div>
+                            </div>
+                            <div class="bg-[#fdf2f4] rounded-xl p-4 text-center border border-pink-100">
+                                <div id="cd-secs" class="text-3xl font-bold text-matsu-pink">--</div>
+                                <div class="text-xs text-gray-500 mt-1">秒</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-3">
+                            <button onclick="joinFestival()"
+                                class="event-pulse bg-matsu-pink text-white px-5 py-3 rounded-full text-sm font-bold shadow-md hover:bg-[#d44968] transition">
+                                立即加入祈福共創
+                            </button>
+                            <button onclick="switchTab('smarthome')"
+                                class="bg-white text-matsu-pink border border-pink-200 px-5 py-3 rounded-full text-sm font-bold hover:bg-[#fdf2f4] transition">
+                                先體驗 AI 護光模式
+                            </button>
+                            <button onclick="switchTab('rooms')"
+                                class="bg-white text-[#8b6b32] border border-[#efdca7] px-5 py-3 rounded-full text-sm font-bold hover:bg-[#fff8e8] transition">
+                                直達主題房巡禮
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -728,7 +858,7 @@ class AiBookingController extends Controller
     <script>
         // Tab Switching Logic
         function switchTab(tabId) {
-            const tabs = ['overview', 'rooms', 'smarthome', 'code'];
+            const tabs = ['overview', 'festival', 'rooms', 'smarthome', 'code'];
 
             tabs.forEach(sec => {
                 document.getElementById('sec-' + sec).classList.add('hidden');
@@ -752,6 +882,45 @@ class AiBookingController extends Controller
                 activeBtn.classList.add('active', 'bg-matsu-pink', 'text-white', 'shadow-md', 'font-medium');
                 activeBtn.classList.remove('text-matsu-pink', 'bg-transparent');
             }
+        }
+
+        // 2026 event countdown
+        const festivalStartDate = new Date('2026-05-01T00:00:00+08:00');
+
+        function updateFestivalCountdown() {
+            const now = new Date();
+            const diff = festivalStartDate.getTime() - now.getTime();
+
+            const daysEl = document.getElementById('cd-days');
+            const hoursEl = document.getElementById('cd-hours');
+            const minsEl = document.getElementById('cd-mins');
+            const secsEl = document.getElementById('cd-secs');
+
+            if (!daysEl || !hoursEl || !minsEl || !secsEl) {
+                return;
+            }
+
+            if (diff <= 0) {
+                daysEl.innerText = '00';
+                hoursEl.innerText = '00';
+                minsEl.innerText = '00';
+                secsEl.innerText = '00';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+
+            daysEl.innerText = String(days).padStart(2, '0');
+            hoursEl.innerText = String(hours).padStart(2, '0');
+            minsEl.innerText = String(mins).padStart(2, '0');
+            secsEl.innerText = String(secs).padStart(2, '0');
+        }
+
+        function joinFestival() {
+            addChatMessage('AI', '歡迎加入 2026「順路有光，停靠有福」祈福共創季。已為您保留活動席次，入住時可領取專屬福籤房卡。');
         }
 
         // Code Tab Switching Logic
@@ -861,6 +1030,9 @@ class AiBookingController extends Controller
             window.appendChild(div);
             window.scrollTop = window.scrollHeight; // Auto-scroll to bottom
         }
+
+        updateFestivalCountdown();
+        setInterval(updateFestivalCountdown, 1000);
     </script>
 </body>
 
