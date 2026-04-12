@@ -1,1038 +1,642 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
-
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>易居空間 YIHOUSE - 品牌理念・2026 活動主題與智慧架構</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* 基礎字體 */
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;600&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>易居空間 YIHOUSE - 粉紅超跑庇佑精神 SPA Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:wght@600;700&family=Barlow:wght@400;600;800&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f7f3;
+      --surface: #ffffff;
+      --text: #252525;
+      --muted: #616161;
+      --line: #e6e3dd;
+      --brand: #d65f8f;
+      --brand-2: #c79b43;
+      --accent: #2f6e73;
+      --radius: 18px;
+    }
 
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #fdfbf7;
-            /* 神聖白 */
-            color: #333333;
-        }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 92% -8%, #ffd9e8 0%, rgba(255, 217, 232, 0) 40%),
+        radial-gradient(circle at -10% 108%, #f7ecd6 0%, rgba(247, 236, 214, 0) 33%),
+        var(--bg);
+    }
 
-        /* 品牌主題變數 */
-        :root {
-            --supercar-pink: #e65c7b;
-            /* 超跑櫻花粉 */
-            --supercar-pink-hover: #d44968;
-            --incense-gold: #d4af37;
-            /* 香火金 */
-            --soft-pink-bg: #fdf2f4;
-        }
+    .app {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 16px 40px;
+    }
 
-        /* 房型主題字體設定 (模擬切字效果) */
-        .font-cailian {
-            font-family: 'DFKai-SB', 'BiauKai', 'Noto Serif TC', serif;
-        }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
 
-        /* 行楷 */
-        .font-qiantang {
-            font-family: 'Kaiti TC', 'Kaiti', 'Noto Serif TC', serif;
-        }
+    .brand { font-weight: 900; letter-spacing: .4px; }
 
-        /* 楷體 */
-        .font-changhen {
-            font-family: 'FangSong', 'STFangsong', 'Noto Serif TC', serif;
-        }
+    .link {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #444;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
 
-        /* 仿宋 */
-        .font-pipa {
-            font-family: 'MingLiU', 'PMingLiU', 'Noto Serif TC', serif;
-        }
+    .hero {
+      border-radius: 24px;
+      color: #fff;
+      background: linear-gradient(120deg, #b84473 0%, #de739f 45%, #2f6e73 100%);
+      padding: 24px;
+      box-shadow: 0 14px 34px rgba(107, 27, 57, 0.28);
+    }
 
-        /* 明體 */
-        .font-guyuan {
-            font-family: 'LiSu', 'STXingkai', 'Noto Serif TC', serif;
-            font-weight: bold;
-        }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 4.2vw, 2.8rem);
+      font-family: "Playfair Display", serif;
+      letter-spacing: .5px;
+    }
 
-        /* 隸書 */
+    .hero p {
+      margin: 10px 0 0;
+      line-height: 1.8;
+      max-width: 980px;
+      opacity: .95;
+    }
 
-        /* 互動效果 */
-        .nav-btn.active {
-            background-color: var(--supercar-pink);
-            color: white;
-            box-shadow: 0 4px 6px rgba(230, 92, 123, 0.2);
-            font-weight: 500;
-        }
+    .theme-switch {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
 
-        .nav-btn {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    .switch-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.45);
+      background: rgba(255,255,255,.18);
+      color: #fff;
+      padding: 8px 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
 
-        .nav-btn:hover:not(.active) {
-            background-color: var(--soft-pink-bg);
-            color: var(--supercar-pink);
-        }
+    .switch-btn.main,
+    .switch-btn.active {
+      background: #fff;
+      color: #7c1f47;
+      border-color: #fff;
+    }
 
-        .text-matsu-pink {
-            color: var(--supercar-pink);
-        }
+    .indicator {
+      margin-left: auto;
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
 
-        .border-matsu-pink {
-            border-color: var(--supercar-pink);
-        }
+    .layout {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 14px;
+    }
 
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
+    .side {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      height: fit-content;
+      position: sticky;
+      top: 12px;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
+    .side h2 {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .menu { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
 
-        /* 智慧控制按鈕開關樣式 */
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: var(--supercar-pink);
-        }
+    .menu button {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: left;
+      font-weight: 700;
+      cursor: pointer;
+      color: #333;
+    }
 
-        .toggle-checkbox:checked+.toggle-label {
-            background-color: var(--supercar-pink);
-        }
+    .menu button.active {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+    }
 
-        .toggle-checkbox {
-            right: 0;
-            z-index: 1;
-            border-color: #e2e8f0;
-            transition: all 0.3s;
-        }
+    .content { display: grid; gap: 12px; }
 
-        .toggle-label {
-            background-color: #cbd5e1;
-            transition: all 0.3s;
-        }
+    .section {
+      display: none;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 6px 18px rgba(42, 31, 20, 0.08);
+    }
 
-        pre::-webkit-scrollbar {
-            height: 8px;
-        }
+    .section.active { display: block; }
 
-        pre::-webkit-scrollbar-track {
-            background: #1e1e1e;
-        }
+    .section h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
 
-        pre::-webkit-scrollbar-thumb {
-            background: #e65c7b;
-            border-radius: 4px;
-        }
+    .lead {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
 
-        .gold-accent-line {
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--incense-gold), transparent);
-            width: 100%;
-            opacity: 0.6;
-        }
+    .photo-grid,
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 12px;
+    }
 
-        .event-shell {
-            background: radial-gradient(circle at 15% 20%, #fff9fa 0%, #fdf2f4 38%, #fff7e8 100%);
-            border: 1px solid #f2d7de;
-        }
+    .photo-grid,
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-        .event-ribbon {
-            background: linear-gradient(120deg, #e65c7b 0%, #d44968 58%, #b53f58 100%);
-        }
+    .card,
+    .photo-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
 
-        .event-glow {
-            box-shadow: 0 10px 30px rgba(230, 92, 123, 0.18);
-        }
+    .photo-card { padding: 0; overflow: hidden; }
 
-        .event-pill {
-            background-color: #fff;
-            border: 1px solid #f2d7de;
-        }
+    .photo-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
 
-        .event-pulse {
-            animation: eventPulse 2.4s ease-in-out infinite;
-        }
+    .photo-meta { padding: 10px; }
 
-        @keyframes eventPulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(230, 92, 123, 0.32);
-            }
+    .photo-meta h4 { margin: 0 0 4px; }
+    .photo-meta p { margin: 0; color: var(--muted); line-height: 1.7; font-size: 14px; }
 
-            70% {
-                transform: scale(1.02);
-                box-shadow: 0 0 0 14px rgba(230, 92, 123, 0);
-            }
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #faecf2;
+      color: #8e2a53;
+      margin-bottom: 8px;
+    }
 
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(230, 92, 123, 0);
-            }
-        }
-    </style>
+    .kpi {
+      font-size: 1.6rem;
+      font-weight: 900;
+    }
+
+    .spot-list { margin: 0; padding-left: 20px; line-height: 1.9; }
+    .spot-list a { color: #b84473; }
+
+    .spot-cards {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 10px;
+    }
+
+    .spot-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .spot-card h4 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .spot-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .chip {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #f7edf1;
+      color: #8a3250;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .spot-actions a {
+      color: #b84473;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    footer { margin-top: 12px; color: #6a6a6a; font-size: 13px; }
+
+    body.theme-forest {
+      --brand: #2f6a4f;
+      --brand-2: #c6a04e;
+      --accent: #3f7b80;
+      --line: #dbe7df;
+    }
+
+    body.theme-forest .hero {
+      background: linear-gradient(120deg, #2f6a4f 0%, #4f8870 50%, #3f7b80 100%);
+      box-shadow: 0 14px 34px rgba(29, 72, 55, 0.26);
+    }
+
+    body.theme-forest .switch-btn.main,
+    body.theme-forest .switch-btn.active { color: #24543f; }
+
+    body.theme-block {
+      --brand: #161616;
+      --brand-2: #f2ca3e;
+      --accent: #505050;
+      --line: #dbdbdb;
+      --radius: 10px;
+    }
+
+    body.theme-block {
+      font-family: Barlow, "Noto Sans TC", sans-serif;
+      background: linear-gradient(145deg, #efefef 0%, #f9f9f9 100%);
+    }
+
+    body.theme-block .hero {
+      background: linear-gradient(120deg, #101010 0%, #303030 55%, #5f5f5f 100%);
+      box-shadow: 0 12px 24px rgba(0,0,0,.2);
+    }
+
+    body.theme-block .hero h1 { text-transform: uppercase; letter-spacing: 1px; }
+    body.theme-block .switch-btn.main,
+    body.theme-block .switch-btn.active { color: #111; }
+
+    body.theme-vivir {
+      --brand: #c85461;
+      --brand-2: #5b8fdb;
+      --accent: #d88455;
+      --line: #efdfd6;
+      --radius: 20px;
+      background: linear-gradient(180deg, #fffaf6 0%, #fff2eb 100%);
+    }
+
+    body.theme-vivir .hero {
+      background: linear-gradient(120deg, #c85461 0%, #e28873 50%, #5b8fdb 100%);
+      box-shadow: 0 14px 32px rgba(130, 48, 59, .24);
+    }
+
+    body.theme-vivir .hero h1 { font-family: "Cormorant Garamond", serif; letter-spacing: .8px; }
+    body.theme-vivir .switch-btn.main,
+    body.theme-vivir .switch-btn.active { color: #8b3343; }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .photo-grid,
+      .grid-2 { grid-template-columns: 1fr; }
+      .spot-cards { grid-template-columns: 1fr; }
+      .indicator { margin-left: 0; }
+    }
+  </style>
 </head>
+<body class="theme-vivir">
+  <main class="app">
+    <div class="topbar">
+      <div class="brand">易居空間 YIHOUSE · 粉紅超跑庇佑精神 SPA Demo</div>
+      <a class="link" href="index.html">回展示中心</a>
+    </div>
 
-<body class="antialiased flex flex-col min-h-screen">
+    <section class="hero">
+      <h1 id="heroTitle">YiHouse Blessing Journey SPA</h1>
+      <p>
+        「易居」與「白沙屯粉紅超跑」的精神連結，是整個品牌的靈魂。
+        此頁完整融合粉紅超跑庇佑精神、詩詞美學與科技實作，並以單頁應用程式（SPA）方式，讓簡報可一頁流暢展示。
+      </p>
+      <div class="theme-switch">
+        <button class="switch-btn main" id="cycleTheme">一鍵切換三風格</button>
+        <button class="switch-btn" data-theme="theme-forest">Forest Calm</button>
+        <button class="switch-btn" data-theme="theme-block">Block Mono</button>
+        <button class="switch-btn active" data-theme="theme-vivir">Taiwan Chic</button>
+        <span class="indicator" id="themeIndicator">目前風格: Taiwan Chic</span>
+      </div>
+    </section>
 
-    <!-- Header / Navigation -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 border-b border-[#fdf2f4]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center">
-                    <span class="text-3xl mr-3 font-serif text-[#d4af37]">印</span>
-                    <div>
-                        <h1 class="text-xl font-bold text-[#3d3d3d] tracking-widest">易居空間 <span
-                                class="text-matsu-pink text-sm font-normal">YIHOUSE</span></h1>
-                        <p class="text-xs text-gray-500 tracking-wider">順應自然・詩詞美學・智慧管家</p>
-                    </div>
-                </div>
-                <nav class="hidden md:flex space-x-2">
-                    <button onclick="switchTab('overview')" id="btn-overview"
-                        class="nav-btn active px-4 py-2 rounded-full text-sm text-matsu-pink">品牌理念</button>
-                    <button onclick="switchTab('festival')" id="btn-festival"
-                        class="nav-btn px-4 py-2 rounded-full text-sm text-matsu-pink">2026 活動主題</button>
-                    <button onclick="switchTab('rooms')" id="btn-rooms"
-                        class="nav-btn px-4 py-2 rounded-full text-sm text-matsu-pink">詩詞切字主題房</button>
-                    <button onclick="switchTab('smarthome')" id="btn-smarthome"
-                        class="nav-btn px-4 py-2 rounded-full text-sm text-matsu-pink">AI 智慧物聯</button>
-                    <button onclick="switchTab('code')" id="btn-code"
-                        class="nav-btn px-4 py-2 rounded-full text-sm text-matsu-pink">系統核心實作</button>
-                </nav>
-            </div>
-        </div>
-        <div class="gold-accent-line"></div>
-    </header>
+    <div class="layout">
+      <aside class="side">
+        <h2>簡報段落</h2>
+        <ul class="menu">
+          <li><button class="active" data-target="section-core">品牌理念 (結緣摘要)</button></li>
+          <li><button data-target="section-festival">2026活動主題</button></li>
+          <li><button data-target="section-poetry">五大詩詞切字美學</button></li>
+          <li><button data-target="section-iot">AI 智慧物聯 + Laravel 架構</button></li>
+          <li><button data-target="section-attractions">Google 週邊 10 大景點</button></li>
+        </ul>
+      </aside>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+      <section class="content">
+        <article class="section active" id="section-core">
+          <h3>品牌理念 (結緣摘要)</h3>
+          <p class="lead">
+            我已將你提供的品牌核心故事，獨立且醒目地整合為首頁第一段。
+            「易居」代表容易居住、輕鬆無壓，也代表順應自然、隨需變通；
+            這與白沙屯粉紅超跑「無固定路線、哪裡需要就往哪裡去」完全同頻，形成易居空間最具辨識度的靈魂敘事。
+          </p>
+          <div class="photo-grid">
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=80" alt="官網首頁風格照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>官網首頁風格照片</h4>
+                <p>首頁採用溫暖迎賓式構圖，從第一屏傳達「庇佑、安心、回家感」的品牌情緒。</p>
+              </div>
+            </article>
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1400&q=80" alt="品牌理念照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>粉紅超跑庇佑精神</h4>
+                <p>由行旅服務延伸到情感照護，將「信念」落地成可感知的入住流程與互動介面。</p>
+              </div>
+            </article>
+          </div>
+        </article>
 
-        <!-- SECTION 1: Brand Concept (Mazu Spirit & Zen) -->
-        <section id="sec-overview" class="fade-in block">
-            <div class="bg-white rounded-2xl shadow-lg p-8 border border-[#fdf2f4] overflow-hidden relative">
+        <article class="section" id="section-festival">
+          <h3>2026活動主題：順路有光，停靠有福</h3>
+          <p class="lead">
+            延續白沙屯粉紅超跑「無固定路線、哪裡需要就往哪裡去」的精神，
+            我們在原有入住動線上新增年度活動區塊，保留既有版面架構，僅增強活動體驗內容。
+          </p>
+          <div class="grid-3">
+            <article class="card">
+              <span class="badge">巡安任務</span>
+              <h4>順路任務地圖</h4>
+              <p class="lead">依旅客需求彈性推薦每日 1-2 條小行程，將景點導覽整合進入住節奏。</p>
+            </article>
+            <article class="card">
+              <span class="badge">入住儀式</span>
+              <h4>福籤房卡</h4>
+              <p class="lead">入住時可抽取專屬祝詞與字體意象，對應詩詞主題房，增加記憶點與儀式感。</p>
+            </article>
+            <article class="card">
+              <span class="badge">夜間照護</span>
+              <h4>護光模式</h4>
+              <p class="lead">晚間自動調整燈光與空調，建立安定、柔和的夜間入住情境。</p>
+            </article>
+          </div>
+        </article>
 
-                <!-- Hero Image -->
-                <div
-                    class="w-full h-64 md:h-96 rounded-xl overflow-hidden mb-8 shadow-inner relative bg-[#fdf2f4] flex items-center justify-center">
-                    <img src="http://googleusercontent.com/image_generation_content/0" alt=""
-                        class="w-full h-full object-cover">
-                    <!-- 若圖片未載入的優雅備用顯示 -->
-                    <div class="absolute inset-0 flex items-center justify-center bg-[#fdf2f4] -z-10">
-                        <span class="text-[#e65c7b] opacity-50 text-xl font-serif">易居空間 YIHOUSE 數位奉茶亭</span>
-                    </div>
-                </div>
+        <article class="section" id="section-poetry">
+          <h3>五大詩詞「切字」美學主題房</h3>
+          <p class="lead">將詩詞意象與字體風格融合到房型敘事，形成房間介紹、照片、設備、注意事項可直接上線的內容結構。</p>
+          <div class="grid-3">
+            <article class="card">
+              <span class="badge">採蓮曲 · 行楷</span>
+              <h4>水韻流光</h4>
+              <p class="lead">湖綠與水紋燈帶，強調晨光感；設備含除濕、智慧窗簾、香氛機。</p>
+            </article>
+            <article class="card">
+              <span class="badge">長恨歌 · 仿宋</span>
+              <h4>月影沉香</h4>
+              <p class="lead">低飽和暖灰與金屬點綴；設備含靜音空調、閱讀燈、獨立音場。</p>
+            </article>
+            <article class="card">
+              <span class="badge">琵琶行 · 明體</span>
+              <h4>弦音入夢</h4>
+              <p class="lead">木作牆面與樂音氛圍；設備含藍牙音響、投影、隔音窗。</p>
+            </article>
+            <article class="card">
+              <span class="badge">早春 · 隸書</span>
+              <h4>春泥新綠</h4>
+              <p class="lead">柔粉與嫩綠調色，明亮親子友善；設備含空氣清淨、童趣夜燈。</p>
+            </article>
+            <article class="card">
+              <span class="badge">送別 · 楷體</span>
+              <h4>遠山靜旅</h4>
+              <p class="lead">沉穩藍灰色系，適合深度放鬆；設備含助眠燈、按摩椅、浴缸。</p>
+            </article>
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1400&q=80" alt="詩詞主題房照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>主題房照片示意（實際地址）</h4>
+                <p>使用可直接存取的實際圖片 URL，便於前端 Demo 與簡報現場穩定展示。</p>
+              </div>
+            </article>
+          </div>
+        </article>
 
-                <h2 class="text-3xl font-bold text-[#3d3d3d] mb-4 border-b-2 border-matsu-pink inline-block pb-1">
-                    品牌核心：順應自然，溫暖庇佑</h2>
+        <article class="section" id="section-iot">
+          <h3>AI 智慧物聯 (Matter / Apple Home) + Laravel 核心架構</h3>
+          <p class="lead">把 AI 管家、IoT 設備控制與後台管理串在同一套服務流程，讓體驗與管理都可擴充。</p>
+          <div class="photo-grid">
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1400&q=80" alt="AI IoT 控制面板照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>AI 智慧物聯</h4>
+                <p>入住者可用語意控制燈光、空調、門鎖與場景，並可串接 Apple Home / Matter 協定。</p>
+              </div>
+            </article>
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" alt="後端架構照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>Laravel 核心架構</h4>
+                <p>以 Laravel 負責會員、訂房、支付、通知、後台權限與報表，前端以 SPA 呈現即時互動。</p>
+              </div>
+            </article>
+          </div>
+          <div class="grid-3" style="margin-top:12px;">
+            <div class="card"><div class="badge">會員認證</div><div class="kpi">Email / 手機 / LINE / Google</div></div>
+            <div class="card"><div class="badge">支付流程</div><div class="kpi">LINE Pay / 綠界 / Stripe</div></div>
+            <div class="card"><div class="badge">維運管理</div><div class="kpi">上傳 / 通知 / 報表 / 後台</div></div>
+          </div>
+        </article>
 
-                <!-- Core Text provided by User -->
-                <div class="bg-[#fdfbf7] p-6 rounded-xl border-l-4 border-[#d4af37] mb-8">
-                    <p class="text-gray-700 leading-relaxed text-lg mb-4">
-                        這是一個充滿禪意又具有美好寓意的名字！<strong class="text-matsu-pink">「易居」</strong>不僅代表著「容易居住、輕鬆無壓」，「易」字本身也有<strong
-                            class="text-[#d4af37]">「變通、順應自然」</strong>的意思。
-                    </p>
-                    <p class="text-gray-700 leading-relaxed text-lg">
-                        這與<strong
-                            class="text-matsu-pink">白沙屯媽祖粉紅超跑</strong>「無固定路線、隨機應變、哪裡需要溫暖就往哪裡去」的精神簡直是不謀而合。我們將您的新品牌名稱
-                        <strong>「易居空間 YIHOUSE」</strong> 完美融入到這份融合了台灣進香意境與現代極簡美學的互動系統中，並在每一個數位體驗環節，強化了<strong
-                            class="text-[#d4af37]">「易（順應、變通）」</strong>與<strong
-                            class="text-matsu-pink">「庇佑」</strong>的深刻連結。
-                    </p>
-                </div>
+        <article class="section" id="section-attractions">
+          <h3>Google 週邊 10 大熱門景點（苗栗海線提案）</h3>
+          <p class="lead">以下以「白沙屯拱天宮」為中心，整理近中程 10 個熱門景點，補上約略距離、車程與建議停留時間，方便你簡報時直接講行程節奏。</p>
+          <div class="spot-cards">
+            <article class="spot-card">
+              <h4>1. 白沙屯拱天宮</h4>
+              <div class="spot-meta"><span class="chip">0 km</span><span class="chip">車程 0 分</span><span class="chip">停留 40-60 分</span></div>
+              <p class="lead">粉紅超跑信仰核心地標，適合作為第一站與品牌故事開場。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=白沙屯拱天宮" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>2. 通霄神社</h4>
+              <div class="spot-meta"><span class="chip">約 7 km</span><span class="chip">車程 15 分</span><span class="chip">停留 30-50 分</span></div>
+              <p class="lead">高地視角與歷史建築並存，適合拍照與短時散步。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=通霄神社" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>3. 苗栗好望角</h4>
+              <div class="spot-meta"><span class="chip">約 9 km</span><span class="chip">車程 18 分</span><span class="chip">停留 40-60 分</span></div>
+              <p class="lead">海風吹拂與風車海景，可安排夕陽時段。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=好望角苗栗" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>4. 台鹽通霄觀光園區</h4>
+              <div class="spot-meta"><span class="chip">約 8 km</span><span class="chip">車程 15 分</span><span class="chip">停留 45-70 分</span></div>
+              <p class="lead">寓教於樂型景點，親子客群接受度高。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=台鹽通霄精鹽廠觀光園區" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>5. 苑裡老街</h4>
+              <div class="spot-meta"><span class="chip">約 13 km</span><span class="chip">車程 22 分</span><span class="chip">停留 60-90 分</span></div>
+              <p class="lead">在地小吃與街區漫遊，適合午間時段。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=苑裡老街" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>6. 飛牛牧場</h4>
+              <div class="spot-meta"><span class="chip">約 17 km</span><span class="chip">車程 28 分</span><span class="chip">停留 2-3 小時</span></div>
+              <p class="lead">親子互動與草地活動，半日行程首選。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=飛牛牧場" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>7. 龍騰斷橋</h4>
+              <div class="spot-meta"><span class="chip">約 38 km</span><span class="chip">車程 50 分</span><span class="chip">停留 40-60 分</span></div>
+              <p class="lead">歷史遺構代表景點，可搭配山線一日遊。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=龍騰斷橋" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>8. 勝興車站</h4>
+              <div class="spot-meta"><span class="chip">約 40 km</span><span class="chip">車程 55 分</span><span class="chip">停留 60-90 分</span></div>
+              <p class="lead">鐵道文化與老街美食，拍照內容豐富。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=勝興車站" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>9. 三義木雕博物館</h4>
+              <div class="spot-meta"><span class="chip">約 41 km</span><span class="chip">車程 58 分</span><span class="chip">停留 60-80 分</span></div>
+              <p class="lead">工藝文化景點，適合文青與家庭客群。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=三義木雕博物館" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+            <article class="spot-card">
+              <h4>10. 鯉魚潭水庫</h4>
+              <div class="spot-meta"><span class="chip">約 46 km</span><span class="chip">車程 65 分</span><span class="chip">停留 45-70 分</span></div>
+              <p class="lead">景觀與散步路線完整，可作返程前收尾行程。</p>
+              <div class="spot-actions"><a href="https://maps.google.com/?q=鯉魚潭水庫苗栗" target="_blank" rel="noopener">Google 地圖</a></div>
+            </article>
+          </div>
+          <div class="photo-grid" style="margin-top:12px;">
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1400&q=80" alt="周邊景點照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>週邊行程視覺</h4>
+                <p>將景點內容直接整合到官網/簡報，可提升訂房轉換與停留天數。</p>
+              </div>
+            </article>
+            <article class="photo-card">
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1400&q=80" alt="旅遊地圖照片" loading="lazy">
+              <div class="photo-meta">
+                <h4>Google 地圖導流</h4>
+                <p>每個景點可直接點擊打開地圖，現場演示時可即時導覽路線與距離。</p>
+              </div>
+            </article>
+          </div>
+          <p class="lead" style="margin-top:12px;">參考社群連結：
+            <a href="https://www.facebook.com/groups/1328743441926271/" target="_blank" rel="noopener">Facebook 社團</a> /
+            <a href="https://www.facebook.com/share/p/17pkKKy89G/" target="_blank" rel="noopener">貼文 1</a> /
+            <a href="https://www.facebook.com/share/p/1EFBf52Qhq/" target="_blank" rel="noopener">貼文 2</a>
+          </p>
+        </article>
+      </section>
+    </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                    <div class="bg-[#fdf2f4] p-6 rounded-xl border border-pink-100 hover:shadow-md transition-shadow">
-                        <div class="text-4xl mb-3 text-center text-matsu-pink">🏮</div>
-                        <h3 class="text-lg font-bold text-center mb-2 text-[#3d3d3d]">隨心而易的體驗 (UX)</h3>
-                        <p class="text-sm text-gray-600 text-justify">
-                            借鏡粉紅超跑「順應所需」的靈活性，前端介面設計將打破僵化流程，提供使用者直覺、順暢且無壓力的探索與訂房動線，體現「易居」的輕鬆感。</p>
-                    </div>
-                    <div
-                        class="bg-white p-6 rounded-xl border border-[#e5e0d8] hover:shadow-md transition-shadow relative overflow-hidden">
-                        <div class="text-4xl mb-3 text-center">✒️</div>
-                        <h3 class="text-lg font-bold text-center mb-2 text-[#3d3d3d]">詩詞切字的美學 (UI)</h3>
-                        <p class="text-sm text-gray-600 text-justify">
-                            汲取白居易與王昌齡的詩詞精華，將「切字」的字體視覺美學（行楷、隸書、仿宋等）融入五大主題房，傳遞深厚的文化溫度。</p>
-                    </div>
-                    <div class="bg-[#fdfbf7] p-6 rounded-xl border border-[#d4af37] hover:shadow-md transition-shadow">
-                        <div class="text-4xl mb-3 text-center">⚙️</div>
-                        <h3 class="text-lg font-bold text-center mb-2 text-[#3d3d3d]">隨需應變的管家 (Tech)</h3>
-                        <p class="text-sm text-gray-600 text-justify">導入 Apple Home 與 Matter 協定，結合 AI 語意分析。無論是調光或冷氣，AI
-                            管家都能如粉紅超跑般「哪裡需要溫暖就往哪裡去」，精準庇佑旅人需求。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <footer>易居空間 SPA Demo · 粉紅超跑庇佑精神 × 詩詞美學 × 科技實作</footer>
+  </main>
 
-        <!-- SECTION 1.5: 2026 Event Theme -->
-        <section id="sec-festival" class="fade-in hidden">
-            <div class="event-shell rounded-2xl p-8 md:p-10 relative overflow-hidden">
-                <div class="absolute -top-20 -right-20 w-52 h-52 rounded-full bg-[#ffdce6] opacity-45"></div>
-                <div class="absolute -bottom-24 -left-20 w-64 h-64 rounded-full bg-[#ffeac1] opacity-35"></div>
+  <script>
+    (function () {
+      const order = ["theme-forest", "theme-block", "theme-vivir"];
+      const labels = {
+        "theme-forest": "Forest Calm",
+        "theme-block": "Block Mono",
+        "theme-vivir": "Taiwan Chic"
+      };
 
-                <div class="relative z-10">
-                    <div class="inline-flex items-center event-ribbon text-white px-5 py-2 rounded-full text-sm tracking-widest mb-4 event-glow">
-                        2026 全新企劃 · 粉紅超跑祈福共創季
-                    </div>
+      const body = document.body;
+      const cycle = document.getElementById("cycleTheme");
+      const indicator = document.getElementById("themeIndicator");
+      const hero = document.getElementById("heroTitle");
+      const buttons = Array.from(document.querySelectorAll(".switch-btn[data-theme]"));
 
-                    <h2 class="text-3xl md:text-4xl font-bold text-[#3d3d3d] leading-tight mb-4">
-                        今年主題：<span class="text-matsu-pink">順路有光，停靠有福</span>
-                    </h2>
-
-                    <p class="text-gray-700 leading-relaxed text-lg max-w-4xl mb-8">
-                        以白沙屯媽祖「無固定路線、哪裡需要就往哪裡去」的精神，策展 2026 年易居年度活動。
-                        我們把每一段旅程化為可被感知的互動：入住是一段巡安，房間是一座停靠站，
-                        AI 管家則是即時遞上暖光與平安提醒的隨行轎班。
-                    </p>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-white rounded-2xl border border-pink-100 p-6 shadow-sm">
-                            <div class="text-3xl mb-3">🗺️</div>
-                            <h3 class="font-bold text-[#3d3d3d] mb-2">主題路線：巡安地圖</h3>
-                            <p class="text-sm text-gray-600 leading-relaxed">
-                                每日解鎖「順路任務」，像粉紅超跑般依旅人需求彈性推薦行程，從在地早餐到夜間散步點位，形成個人祈福動線。
-                            </p>
-                        </div>
-                        <div class="bg-white rounded-2xl border border-[#efdca7] p-6 shadow-sm">
-                            <div class="text-3xl mb-3">🧧</div>
-                            <h3 class="font-bold text-[#3d3d3d] mb-2">入住儀式：福籤房卡</h3>
-                            <p class="text-sm text-gray-600 leading-relaxed">
-                                今年新增「福籤房卡」機制，入住時隨機抽取祝詞與字體意象，對應五大主題房，讓每次開門都像一段專屬起駕。
-                            </p>
-                        </div>
-                        <div class="bg-white rounded-2xl border border-[#e9d6f0] p-6 shadow-sm">
-                            <div class="text-3xl mb-3">🌙</div>
-                            <h3 class="font-bold text-[#3d3d3d] mb-2">夜間體驗：護光模式</h3>
-                            <p class="text-sm text-gray-600 leading-relaxed">
-                                每晚 21:00 後可啟用「護光模式」，AI 依作息自動微調照明與空調，營造如遶境夜行般穩定安心的節奏。
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="bg-white/90 backdrop-blur rounded-2xl border border-[#f2d7de] p-6 md:p-8">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-                            <h3 class="text-2xl font-bold text-[#3d3d3d]">活動倒數與現場參與</h3>
-                            <span class="event-pill text-xs tracking-widest px-3 py-1 rounded-full text-matsu-pink font-bold">限時企劃 2026.05 - 2026.12</span>
-                        </div>
-
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="countdown-grid">
-                            <div class="bg-[#fdf2f4] rounded-xl p-4 text-center border border-pink-100">
-                                <div id="cd-days" class="text-3xl font-bold text-matsu-pink">--</div>
-                                <div class="text-xs text-gray-500 mt-1">天</div>
-                            </div>
-                            <div class="bg-[#fdf2f4] rounded-xl p-4 text-center border border-pink-100">
-                                <div id="cd-hours" class="text-3xl font-bold text-matsu-pink">--</div>
-                                <div class="text-xs text-gray-500 mt-1">時</div>
-                            </div>
-                            <div class="bg-[#fdf2f4] rounded-xl p-4 text-center border border-pink-100">
-                                <div id="cd-mins" class="text-3xl font-bold text-matsu-pink">--</div>
-                                <div class="text-xs text-gray-500 mt-1">分</div>
-                            </div>
-                            <div class="bg-[#fdf2f4] rounded-xl p-4 text-center border border-pink-100">
-                                <div id="cd-secs" class="text-3xl font-bold text-matsu-pink">--</div>
-                                <div class="text-xs text-gray-500 mt-1">秒</div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col md:flex-row gap-3">
-                            <button onclick="joinFestival()"
-                                class="event-pulse bg-matsu-pink text-white px-5 py-3 rounded-full text-sm font-bold shadow-md hover:bg-[#d44968] transition">
-                                立即加入祈福共創
-                            </button>
-                            <button onclick="switchTab('smarthome')"
-                                class="bg-white text-matsu-pink border border-pink-200 px-5 py-3 rounded-full text-sm font-bold hover:bg-[#fdf2f4] transition">
-                                先體驗 AI 護光模式
-                            </button>
-                            <button onclick="switchTab('rooms')"
-                                class="bg-white text-[#8b6b32] border border-[#efdca7] px-5 py-3 rounded-full text-sm font-bold hover:bg-[#fff8e8] transition">
-                                直達主題房巡禮
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 2: Rooms (Poetry & Typography) -->
-        <section id="sec-rooms" class="fade-in hidden">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-[#3d3d3d] mb-4">一字一世界，一室一長歌</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">
-                    我們將原稿中的詩詞（如：菱葉、荷花、早鶯、春泥）進行「切字」意象提取。從行楷的靈動到仿宋的清冷，賦予五間房專屬的字體個性與色彩調性。
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- Room 1: 採蓮曲 -->
-                <div
-                    class="bg-white rounded-2xl overflow-hidden border border-[#cce3d8] hover:shadow-xl transition flex flex-col shadow-sm">
-                    <div class="h-32 bg-[#e0f0e9] flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute text-[8rem] text-[#b3d4c4] opacity-30 font-cailian -right-4 -bottom-8">荷
-                        </div>
-                        <h3 class="text-3xl font-cailian text-[#2c523f] z-10 tracking-widest">採蓮曲</h3>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <p class="text-sm text-[#4a7c59] mb-4 font-cailian italic border-l-2 border-[#4a7c59] pl-2">
-                            「菱葉縈波荷颭風，荷花深處小船通。」</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-4 flex-grow">
-                            <li><strong>切字意象：</strong> 取原稿之「菱、荷、笑」。</li>
-                            <li><strong>字體主軸：</strong> <span class="font-cailian text-[#2c523f] font-bold">行楷體</span>
-                                (靈動、如水波蕩漾)</li>
-                            <li><strong>空間美學：</strong> 以「碧玉青」與「荷花粉」為主色調。圓弧線條與水波紋玻璃，營造如乘小船入藕花深處的「易居」輕盈感。</li>
-                        </ul>
-                        <button
-                            class="w-full bg-[#4a7c59] text-white py-2 rounded-full text-sm hover:bg-[#3a6346] transition font-bold">預訂此房</button>
-                    </div>
-                </div>
-
-                <!-- Room 2: 錢塘湖春行 -->
-                <div
-                    class="bg-white rounded-2xl overflow-hidden border border-[#e8dcc4] hover:shadow-xl transition flex flex-col shadow-sm">
-                    <div class="h-32 bg-[#f5ebd9] flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute text-[8rem] text-[#dfcfae] opacity-40 font-qiantang -left-4 -bottom-8">鶯
-                        </div>
-                        <h3 class="text-3xl font-qiantang text-[#8b6b32] z-10 tracking-widest">錢塘湖春行</h3>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <p class="text-sm text-[#8b6b32] mb-4 font-qiantang italic border-l-2 border-[#8b6b32] pl-2">
-                            「幾處早鶯爭暖樹，誰家新燕啄春泥。」</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-4 flex-grow">
-                            <li><strong>切字意象：</strong> 取原稿之「春、鶯、泥」。</li>
-                            <li><strong>字體主軸：</strong> <span class="font-qiantang text-[#8b6b32] font-bold">楷體</span>
-                                (端莊、生機盎然)</li>
-                            <li><strong>空間美學：</strong> 導入大面積落地窗引入自然光，搭配實木與藤編材質，充滿初春甦醒的溫暖生命力，順應自然法則。</li>
-                        </ul>
-                        <button
-                            class="w-full bg-[#8b6b32] text-white py-2 rounded-full text-sm hover:bg-[#6e5426] transition font-bold">預訂此房</button>
-                    </div>
-                </div>
-
-                <!-- Room 3: 長恨歌 -->
-                <div
-                    class="bg-white rounded-2xl overflow-hidden border border-[#e6ccce] hover:shadow-xl transition flex flex-col shadow-sm">
-                    <div class="h-32 bg-[#f0e1e3] flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute text-[8rem] text-[#d6b3b7] opacity-40 font-changhen -right-4 -bottom-8">歡
-                        </div>
-                        <h3 class="text-3xl font-changhen text-[#8b3a43] z-10 tracking-widest">長恨歌</h3>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <p class="text-sm text-[#8b3a43] mb-4 font-changhen italic border-l-2 border-[#8b3a43] pl-2">
-                            「承歡侍宴無閑暇，春從春遊夜專夜。」</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-4 flex-grow">
-                            <li><strong>切字意象：</strong> 取原稿之「春、歡、苦」。</li>
-                            <li><strong>字體主軸：</strong> <span class="font-changhen text-[#8b3a43] font-bold">仿宋體</span>
-                                (瘦骨清冷、皇家華麗)</li>
-                            <li><strong>空間美學：</strong> 呼應超跑櫻花粉的「胭脂紅」搭配「暗金」。絲絨軟裝與黃銅配件，演繹極致奢華與一絲哀婉的浪漫。</li>
-                        </ul>
-                        <button
-                            class="w-full bg-matsu-pink text-white py-2 rounded-full text-sm hover:bg-[#d44968] transition font-bold">預訂此房</button>
-                    </div>
-                </div>
-
-                <!-- Room 4: 琵琶行 -->
-                <div
-                    class="bg-white rounded-2xl overflow-hidden border border-[#cbd5e1] hover:shadow-xl transition flex flex-col shadow-sm">
-                    <div class="h-32 bg-[#e2e8f0] flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute text-[8rem] text-[#94a3b8] opacity-30 font-pipa -left-4 -bottom-8">琶</div>
-                        <h3 class="text-3xl font-pipa text-[#334155] z-10 tracking-widest">琵琶行</h3>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <p class="text-sm text-[#334155] mb-4 font-pipa italic border-l-2 border-[#334155] pl-2">
-                            「醉不成歡慘將別，別時茫茫江浸月。」</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-4 flex-grow">
-                            <li><strong>切字意象：</strong> 取原稿之「琶、江、月」。</li>
-                            <li><strong>字體主軸：</strong> <span class="font-pipa text-[#334155] font-bold">明體</span>
-                                (橫細直粗、音樂頓挫節奏)</li>
-                            <li><strong>空間美學：</strong> 「江月銀」與「秋木灰」。配置頂級視聽與吸音牆，光影猶如月灑江面，提供旅人一處靜思的避風港。</li>
-                        </ul>
-                        <button
-                            class="w-full bg-[#334155] text-white py-2 rounded-full text-sm hover:bg-[#1e293b] transition font-bold">預訂此房</button>
-                    </div>
-                </div>
-
-                <!-- Room 5: 賦得古原草送別 -->
-                <div
-                    class="bg-white rounded-2xl overflow-hidden border border-[#eeddc1] hover:shadow-xl transition flex flex-col shadow-sm lg:col-start-2">
-                    <div class="h-32 bg-[#f5e6d0] flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute text-[8rem] text-[#dcb88e] opacity-40 font-guyuan -right-4 -bottom-8">草
-                        </div>
-                        <h3 class="text-3xl font-guyuan text-[#9b6c33] z-10 tracking-widest">古原草</h3>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <p class="text-sm text-[#9b6c33] mb-4 font-guyuan italic border-l-2 border-[#9b6c33] pl-2">
-                            「野火燒不盡，春風吹又生。」</p>
-                        <ul class="text-sm text-gray-700 space-y-2 mb-4 flex-grow">
-                            <li><strong>切字意象：</strong> 取原稿之「草、榮、生」。</li>
-                            <li><strong>字體主軸：</strong> <span class="font-guyuan text-[#9b6c33] font-bold">隸書/厚重體</span>
-                                (蒼勁有力、歲月刻痕)</li>
-                            <li><strong>空間美學：</strong> 「原野黃」與「枯木棕」。保留清水模或粗獷石材肌理，呈現堅韌不拔與時間淬鍊之美，如媽祖賜予的生生不息。</li>
-                        </ul>
-                        <button
-                            class="w-full bg-[#9b6c33] text-white py-2 rounded-full text-sm hover:bg-[#7a5426] transition font-bold">預訂此房</button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- SECTION 3: AI & Smart Home Integration -->
-        <section id="sec-smarthome" class="fade-in hidden">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-[#3d3d3d] mb-4">隨需應變的 AI 智慧管家</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">
-                    落實「易」的變通與「庇佑」的溫暖。透過 Matter 協定整合 Apple HomeKit，搭配藍牙閘道器控管電子門鎖。只要一句話，AI 客服就能如粉紅超跑般，立即為您送上最舒適的燈光與空調溫度。
-                </p>
-            </div>
-
-            <div class="flex flex-col lg:flex-row gap-8">
-                <!-- Smart Home Control Panel -->
-                <div class="lg:w-1/2 bg-white p-6 rounded-2xl shadow-lg border border-[#fdf2f4]">
-                    <h3 class="text-xl font-bold text-matsu-pink mb-6 flex items-center">
-                        <span class="mr-2 text-2xl">📱</span> 中控台 (Apple Home 模擬)
-                    </h3>
-
-                    <!-- Door Lock (Bluetooth Gateway) -->
-                    <div
-                        class="mb-6 p-4 bg-[#fdfbf7] rounded-xl border border-[#e5e0d8] flex justify-between items-center transition hover:shadow-md">
-                        <div>
-                            <div class="font-bold text-gray-800 flex items-center"><span class="mr-2">🚪</span> 電子門鎖
-                            </div>
-                            <div class="text-xs text-gray-500 mt-1">Bluetooth Gateway OTP 派發</div>
-                            <div class="text-xs font-mono bg-gray-200 px-2 py-1 rounded mt-2 inline-block">當前密碼: <span
-                                    id="otp-code" class="text-matsu-pink font-bold">***</span></div>
-                        </div>
-                        <div>
-                            <button onclick="generateOTP()"
-                                class="bg-[#d4af37] text-white text-xs px-3 py-2 rounded-full shadow hover:bg-[#b8952b] transition font-bold">產生一次性密碼</button>
-                        </div>
-                    </div>
-
-                    <!-- Lighting (Matter) -->
-                    <div
-                        class="mb-6 p-4 bg-[#fdfbf7] rounded-xl border border-[#e5e0d8] flex justify-between items-center transition hover:shadow-md">
-                        <div>
-                            <div class="font-bold text-gray-800 flex items-center"><span class="mr-2"
-                                    id="icon-light">💡</span> 庇佑暖光 (主照明)</div>
-                            <div class="text-xs text-gray-500 mt-1">Matter Protocol 連線中</div>
-                        </div>
-                        <div
-                            class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input type="checkbox" name="toggle" id="toggle-light" onchange="toggleDevice('light')"
-                                class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
-                            <label for="toggle-light"
-                                class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
-                        </div>
-                    </div>
-
-                    <!-- Curtains (Matter) -->
-                    <div
-                        class="mb-6 p-4 bg-[#fdfbf7] rounded-xl border border-[#e5e0d8] flex justify-between items-center transition hover:shadow-md">
-                        <div>
-                            <div class="font-bold text-gray-800 flex items-center"><span class="mr-2">🪟</span> 順應智慧窗簾
-                            </div>
-                            <div class="text-xs text-gray-500 mt-1">Matter Protocol 連線中</div>
-                        </div>
-                        <div class="w-1/3">
-                            <input type="range" min="0" max="100" value="0"
-                                class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#e65c7b]">
-                            <div class="text-xs text-center text-gray-500 mt-1">開啟度 0%</div>
-                        </div>
-                    </div>
-
-                    <!-- AC (Matter) -->
-                    <div
-                        class="mb-2 p-4 bg-[#fdfbf7] rounded-xl border border-[#e5e0d8] flex justify-between items-center transition hover:shadow-md">
-                        <div>
-                            <div class="font-bold text-gray-800 flex items-center"><span class="mr-2">❄️</span> 恆溫空調
-                            </div>
-                            <div class="text-xs text-gray-500 mt-1">目標溫度: <span id="ac-temp"
-                                    class="font-bold text-matsu-pink text-lg">24</span>°C</div>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button onclick="adjustTemp(-1)"
-                                class="w-8 h-8 rounded-full bg-[#fdf2f4] text-matsu-pink hover:bg-matsu-pink hover:text-white font-bold transition">-</button>
-                            <button onclick="adjustTemp(1)"
-                                class="w-8 h-8 rounded-full bg-[#fdf2f4] text-matsu-pink hover:bg-matsu-pink hover:text-white font-bold transition">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI Chatbot Interface -->
-                <div
-                    class="lg:w-1/2 bg-white rounded-2xl shadow-lg border border-[#fdf2f4] flex flex-col h-[520px] overflow-hidden">
-                    <div class="p-4 border-b border-[#fdf2f4] bg-[#fdfbf7] flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div
-                                class="w-10 h-10 rounded-full bg-matsu-pink text-white flex items-center justify-center text-xl mr-3 shadow-sm">
-                                易</div>
-                            <div>
-                                <div class="font-bold text-gray-800">易居管家 (YI-Bot)</div>
-                                <div class="text-xs text-[#d4af37] font-bold">● AI 隨需庇佑連線中</div>
-                            </div>
-                        </div>
-                        <span class="text-2xl opacity-50">🌸</span>
-                    </div>
-
-                    <div id="chat-window" class="flex-grow p-4 overflow-y-auto space-y-4 bg-gray-50">
-                        <div class="flex items-start">
-                            <div
-                                class="bg-white border border-gray-200 p-3 rounded-2xl rounded-tl-none max-w-[80%] text-sm text-gray-700 shadow-sm leading-relaxed">
-                                歡迎來到易居空間
-                                YIHOUSE！我是您的專屬管家。<br><br>我可以幫您查詢「長恨歌」或「採蓮曲」等詩詞主題房的空房，或者直接幫您控制房內設備。您可以對我說「我覺得有點熱」或是「幫我預訂房間」。
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-4 border-t border-gray-100 bg-white">
-                        <div class="flex space-x-2">
-                            <input type="text" id="chat-input" placeholder="輸入需求，管家將順應為您服務..."
-                                class="flex-grow px-4 py-2 border border-pink-200 rounded-full focus:outline-none focus:border-matsu-pink focus:ring-1 focus:ring-matsu-pink text-sm"
-                                onkeypress="handleChat(event)">
-                            <button onclick="sendMsg()"
-                                class="bg-matsu-pink text-white px-5 py-2 rounded-full hover:bg-[#d44968] transition font-bold shadow-md">傳送</button>
-                        </div>
-                        <div class="mt-3 flex flex-wrap gap-2">
-                            <button onclick="quickReply('預訂長恨歌')"
-                                class="text-xs bg-[#fdf2f4] border border-pink-100 px-3 py-1.5 rounded-full text-matsu-pink hover:bg-pink-100 transition">📝
-                                預訂長恨歌</button>
-                            <button onclick="quickReply('覺得有點熱，幫我調降冷氣')"
-                                class="text-xs bg-[#fdf2f4] border border-pink-100 px-3 py-1.5 rounded-full text-matsu-pink hover:bg-pink-100 transition">❄️
-                                覺得有點熱</button>
-                            <button onclick="quickReply('幫我把主照明打開')"
-                                class="text-xs bg-[#fdf2f4] border border-pink-100 px-3 py-1.5 rounded-full text-matsu-pink hover:bg-pink-100 transition">💡
-                                打開主照明</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 4: Laravel Code -->
-        <section id="sec-code" class="fade-in hidden">
-            <div class="bg-white rounded-2xl shadow-lg p-8 border border-[#fdf2f4]">
-                <h2 class="text-2xl font-bold text-[#3d3d3d] mb-4 border-b-2 border-matsu-pink inline-block pb-1">系統核心實作
-                    (Laravel / Matter API)</h2>
-                <p class="text-gray-600 mb-6 text-sm leading-relaxed">
-                    如同扛起神轎的轎班，後端架構必須穩固且精準。此區塊展示易居空間後端的核心邏輯：包含處理 Matter 智慧家電協定的 <code>SmartHomeController</code>，解析 AI
-                    客服語意意圖的 <code>AiBookingController</code>，以及運用 Blade Template 渲染詩詞「切字」美學的視圖。
-                </p>
-
-                <div class="flex border-b border-pink-100 mb-4 overflow-x-auto whitespace-nowrap pb-1">
-                    <button onclick="showCode('iot')"
-                        class="code-tab font-medium text-sm px-4 py-2 border-b-2 border-matsu-pink text-matsu-pink">SmartHomeController.php
-                        (Matter/BT)</button>
-                    <button onclick="showCode('ai')"
-                        class="code-tab font-medium text-sm px-4 py-2 text-gray-500 hover:text-matsu-pink transition">AiBookingController.php
-                        (LLM)</button>
-                    <button onclick="showCode('view')"
-                        class="code-tab font-medium text-sm px-4 py-2 text-gray-500 hover:text-matsu-pink transition">rooms/index.blade.php</button>
-                </div>
-
-                <!-- Code: IoT Controller -->
-                <div id="code-iot" class="code-block block relative">
-                    <button onclick="copyCode('code-content-iot')"
-                        class="absolute top-2 right-2 bg-gray-700 hover:bg-matsu-pink text-white text-xs px-2 py-1 rounded transition">複製</button>
-                    <pre id="code-content-iot"
-                        class="bg-[#1e1e1e] text-[#d4d4d4] p-5 rounded-xl overflow-x-auto text-sm font-mono shadow-inner border border-gray-800">
-&lt;?php
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use App\Services\MatterProtocolService; // 封裝 Matter 協定的自訂服務
-
-class SmartHomeController extends Controller
-{
-    protected $matterService;
-
-    public function __construct(MatterProtocolService $matterService)
-    {
-        $this-&gt;matterService = $matterService;
-    }
-
-    /**
-     * 易居空間 - 控制 Matter 設備 (順應自然，調整光影與溫度)
-     * API Endpoint: POST /api/v1/smarthome/control
-     */
-    public function controlDevice(Request $request)
-    {
-        $validated = $request-&gt;validate([
-            'room_id'   =&gt; 'required|exists:rooms,id',
-            'device'    =&gt; 'required|in:light,ac,curtain',
-            'state'     =&gt; 'required', // 依設備不同 (on/off, 數值)
-        ]);
-
-        try {
-            // 透過區域網路的 Matter Bridge (如 Apple HomePod) 傳遞庇佑指令
-            $result = $this-&gt;matterService-&gt;sendCommand(
-                $validated['room_id'],
-                $validated['device'],
-                $validated['state']
-            );
-
-            return response()-&gt;json(['success' =&gt; true, 'data' =&gt; $result]);
-
-        } catch (\Exception $e) {
-            Log::error("Matter 設備連線異常: " . $e-&gt;getMessage());
-            return response()-&gt;json(['success' =&gt; false, 'message' =&gt; '管家目前無法連線設備'], 503);
+      function applyTheme(theme) {
+        order.forEach((name) => body.classList.remove(name));
+        body.classList.add(theme);
+        buttons.forEach((btn) => btn.classList.toggle("active", btn.dataset.theme === theme));
+        indicator.textContent = "目前風格: " + labels[theme];
+        if (theme === "theme-block") {
+          hero.textContent = "Urban Blessing Console";
+        } else if (theme === "theme-forest") {
+          hero.textContent = "Blessed Forest Journey";
+        } else {
+          hero.textContent = "YiHouse Blessing Journey SPA";
         }
-    }
+        localStorage.setItem("yihouse_spa_theme", theme);
+      }
 
-    /**
-     * 透過 Bluetooth Gateway 遠端發送門鎖 OTP
-     * API Endpoint: POST /api/v1/smarthome/lock/otp
-     */
-    public function generateLockOTP(Request $request)
-    {
-        $booking = $request-&gt;user()-&gt;currentBooking();
-        if (!$booking) {
-            return response()-&gt;json(['error' =&gt; '尚未結緣有效訂單'], 403);
-        }
+      buttons.forEach((btn) => btn.addEventListener("click", () => applyTheme(btn.dataset.theme)));
+      cycle.addEventListener("click", () => {
+        const idx = order.findIndex((name) => body.classList.contains(name));
+        applyTheme(order[(idx + 1) % order.length]);
+      });
 
-        // 產生 6 位數密碼
-        $otp = sprintf("%06d", mt_rand(1, 999999));
-        
-        // 呼叫藍牙閘道器 API
-        $response = Http::withToken(config('services.bt_gateway.token'))
-            -&gt;post(config('services.bt_gateway.url') . '/v3/keyboardPwd/add', [
-                'lockId' =&gt; $booking-&gt;room-&gt;lock_id,
-                'keyboardPwd' =&gt; $otp,
-                'startDate' =&gt; $booking-&gt;check_in_date-&gt;timestamp,
-                'endDate'   =&gt; $booking-&gt;check_out_date-&gt;timestamp,
-                'addType'   =&gt; 2, // 透過 Gateway 遠端下發
-            ]);
+      document.querySelectorAll(".menu button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.target;
+          document.querySelectorAll(".menu button").forEach((b) => b.classList.toggle("active", b === btn));
+          document.querySelectorAll(".section").forEach((s) => s.classList.toggle("active", s.id === id));
+        });
+      });
 
-        if ($response-&gt;successful()) {
-            return response()-&gt;json(['otp' =&gt; $otp, 'message' =&gt; '專屬密碼已送達門鎖']);
-        }
-
-        return response()-&gt;json(['error' =&gt; '藍牙閘道連線失敗'], 500);
-    }
-}
-</pre>
-                </div>
-
-                <!-- Code: AI Controller -->
-                <div id="code-ai" class="code-block hidden relative">
-                    <button onclick="copyCode('code-content-ai')"
-                        class="absolute top-2 right-2 bg-gray-700 hover:bg-matsu-pink text-white text-xs px-2 py-1 rounded transition">複製</button>
-                    <pre id="code-content-ai"
-                        class="bg-[#1e1e1e] text-[#d4d4d4] p-5 rounded-xl overflow-x-auto text-sm font-mono shadow-inner border border-gray-800">
-&lt;?php
-namespace App\Http\Controllers\Api;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Services\MatterProtocolService;
-use OpenAI\Laravel\Facades\OpenAI; // 使用 OpenAI 進行語意分析
-
-class AiBookingController extends Controller
-{
-    /**
-     * 易居管家：處理自然語言輸入 (訂房查詢 或 設備控制)
-     */
-    public function handleChat(Request $request)
-    {
-        $userMessage = $request-&gt;input('message');
-        
-        // 系統提示詞：賦予 AI 易居管家角色，融入媽祖庇佑與順應自然的口吻
-        $systemPrompt = "
-            你是「易居空間 YIHOUSE」的智慧管家。你的語氣應該溫和、充滿禪意與人情味，體現『順應自然、溫暖庇佑』的品牌精神。
-            請分析使用者的意圖並回傳 JSON 格式：
-            - 控制設備: {\"intent\": \"control\", \"device\": \"light|ac|curtain\", \"action\": \"on|off|temp_up|temp_down\"}
-            - 訂房查詢: {\"intent\": \"booking\", \"room\": \"採蓮曲|錢塘湖春行|長恨歌|琵琶行|古原草\"}
-            - 閒聊回覆: {\"intent\": \"chat\", \"reply\": \"你的回覆文字\"}
-        ";
-
-        $response = OpenAI::chat()-&gt;create([
-            'model' =&gt; 'gpt-4',
-            'messages' =&gt; [
-                ['role' =&gt; 'system', 'content' =&gt; $systemPrompt],
-                ['role' =&gt; 'user', 'content' =&gt; $userMessage],
-            ],
-        ]);
-
-        $aiOutput = json_decode($response-&gt;choices[0]-&gt;message-&gt;content, true);
-
-        // 根據 AI 解析的意圖執行對應邏輯
-        if ($aiOutput['intent'] === 'control') {
-            app(SmartHomeController::class)-&gt;controlDevice(new Request([
-                'room_id' =&gt; auth()-&gt;user()-&gt;current_room_id ?? 1,
-                'device' =&gt; $aiOutput['device'],
-                'state' =&gt; $aiOutput['action']
-            ]));
-            return response()-&gt;json(['reply' =&gt; '沒問題，已順應您的需求調整了設備。願您在房內感到舒適平靜。']);
-        }
-
-        if ($aiOutput['intent'] === 'booking') {
-            $roomName = $aiOutput['room'];
-            return response()-&gt;json(['reply' =&gt; "好的，馬上為您查詢蘊含字體美學的 {$roomName} 房型是否結緣有空房..."]);
-        }
-
-        return response()-&gt;json(['reply' =&gt; $aiOutput['reply']]);
-    }
-}
-</pre>
-                </div>
-
-                <!-- Code: Blade View -->
-                <div id="code-view" class="code-block hidden relative">
-                    <button onclick="copyCode('code-content-view')"
-                        class="absolute top-2 right-2 bg-gray-700 hover:bg-matsu-pink text-white text-xs px-2 py-1 rounded transition">複製</button>
-                    <pre id="code-content-view"
-                        class="bg-[#1e1e1e] text-[#d4d4d4] p-5 rounded-xl overflow-x-auto text-sm font-mono shadow-inner border border-gray-800">
-&lt;!-- resources/views/rooms/index.blade.php --&gt;
-@extends('layouts.app')
-
-@section('content')
-&lt;!-- 透過 Laravel Vite 載入專屬的字體切字 CSS --&gt;
-@push('styles')
-    &lt;link rel="stylesheet" href="{{ asset('css/fonts.css') }}"&gt;
-@endpush
-
-&lt;div class="container mx-auto px-4 py-8"&gt;
-    &lt;h1 class="text-3xl font-bold text-center mb-8 text-[#3d3d3d]"&gt;一字一世界，一室一長歌&lt;/h1&gt;
-
-    &lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"&gt;
-        {{-- 使用 Blade 迴圈印出資料庫中的主題房型 --}}
-        @foreach($rooms as $room)
-            &lt;!-- 動態套用房型專屬的背景色與 CSS 字體 Class --&gt;
-            &lt;div class="rounded-2xl overflow-hidden border {{ $room-&gt;css_border_class }} flex flex-col hover:shadow-xl transition"&gt;
-                
-                &lt;div class="h-32 {{ $room-&gt;css_bg_class }} flex items-center justify-center relative overflow-hidden"&gt;
-                    &lt;!-- 切字意象：擷取資料庫設定的切字字元 (如：荷、鶯、歡、琶、草) 作為背景浮水印 --&gt;
-                    &lt;div class="absolute text-[8rem] {{ $room-&gt;css_text_light_class }} opacity-30 {{ $room-&gt;font_family_class }} -right-4 -bottom-8"&gt;
-                        {{ $room-&gt;cut_word_character }}
-                    &lt;/div&gt;
-                    &lt;h3 class="text-3xl {{ $room-&gt;font_family_class }} {{ $room-&gt;css_text_dark_class }} z-10 font-bold tracking-widest"&gt;
-                        {{ $room-&gt;name }}
-                    &lt;/h3&gt;
-                &lt;/div&gt;
-
-                &lt;div class="p-6 bg-white flex-grow flex flex-col"&gt;
-                    &lt;p class="text-sm {{ $room-&gt;css_text_dark_class }} mb-4 {{ $room-&gt;font_family_class }} italic border-l-2 {{ $room-&gt;css_border_dark_class }} pl-2"&gt;
-                        「{{ $room-&gt;poem_quote }}」
-                    &lt;/p&gt;
-                    &lt;div class="text-sm text-gray-700 mb-4 flex-grow space-y-2"&gt;
-                        {!! $room-&gt;description_html !!}
-                    &lt;/div&gt;
-                    
-                    &lt;a href="{{ route('rooms.show', $room-&gt;id) }}" class="block text-center w-full py-2 rounded-full text-white {{ $room-&gt;css_btn_class }} transition font-bold shadow-md"&gt;
-                        預訂結緣
-                    &lt;/a&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        @endforeach
-    &lt;/div&gt;
-&lt;/div&gt;
-@endsection
-</pre>
-                </div>
-
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-white border-t border-[#fdf2f4] mt-12 py-10 relative overflow-hidden">
-        <div
-            class="absolute bottom-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-30">
-        </div>
-        <div class="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
-            <p class="font-serif mb-3 text-2xl text-matsu-pink tracking-widest">易居空間 YIHOUSE</p>
-            <p class="mb-1">🌸 將粉紅超跑的無私庇佑，安放於現代智慧與詩詞切字之中 🌸</p>
-            <p>&copy; 2026 易居空間 YIHOUSE. 順應自然，旅人平安.</p>
-        </div>
-    </footer>
-
-    <!-- JS Logic -->
-    <script>
-        // Tab Switching Logic
-        function switchTab(tabId) {
-            const tabs = ['overview', 'festival', 'rooms', 'smarthome', 'code'];
-
-            tabs.forEach(sec => {
-                document.getElementById('sec-' + sec).classList.add('hidden');
-                document.getElementById('sec-' + sec).classList.remove('block');
-
-                const btn = document.getElementById('btn-' + sec);
-                if (btn) {
-                    btn.classList.remove('active', 'bg-matsu-pink', 'text-white', 'shadow-md', 'font-medium');
-                    btn.classList.add('text-matsu-pink', 'bg-transparent');
-                }
-            });
-
-            const targetSection = document.getElementById('sec-' + tabId);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-                targetSection.classList.add('block');
-            }
-
-            const activeBtn = document.getElementById('btn-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.add('active', 'bg-matsu-pink', 'text-white', 'shadow-md', 'font-medium');
-                activeBtn.classList.remove('text-matsu-pink', 'bg-transparent');
-            }
-        }
-
-        // 2026 event countdown
-        const festivalStartDate = new Date('2026-05-01T00:00:00+08:00');
-
-        function updateFestivalCountdown() {
-            const now = new Date();
-            const diff = festivalStartDate.getTime() - now.getTime();
-
-            const daysEl = document.getElementById('cd-days');
-            const hoursEl = document.getElementById('cd-hours');
-            const minsEl = document.getElementById('cd-mins');
-            const secsEl = document.getElementById('cd-secs');
-
-            if (!daysEl || !hoursEl || !minsEl || !secsEl) {
-                return;
-            }
-
-            if (diff <= 0) {
-                daysEl.innerText = '00';
-                hoursEl.innerText = '00';
-                minsEl.innerText = '00';
-                secsEl.innerText = '00';
-                return;
-            }
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const mins = Math.floor((diff / (1000 * 60)) % 60);
-            const secs = Math.floor((diff / 1000) % 60);
-
-            daysEl.innerText = String(days).padStart(2, '0');
-            hoursEl.innerText = String(hours).padStart(2, '0');
-            minsEl.innerText = String(mins).padStart(2, '0');
-            secsEl.innerText = String(secs).padStart(2, '0');
-        }
-
-        function joinFestival() {
-            addChatMessage('AI', '歡迎加入 2026「順路有光，停靠有福」祈福共創季。已為您保留活動席次，入住時可領取專屬福籤房卡。');
-        }
-
-        // Code Tab Switching Logic
-        function showCode(type) {
-            document.querySelectorAll('.code-block').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.code-tab').forEach(el => {
-                el.classList.remove('border-b-2', 'border-matsu-pink', 'text-matsu-pink');
-                el.classList.add('text-gray-500');
-            });
-
-            document.getElementById('code-' + type).classList.remove('hidden');
-            document.getElementById('code-' + type).classList.add('block');
-
-            event.currentTarget.classList.remove('text-gray-500');
-            event.currentTarget.classList.add('border-b-2', 'border-matsu-pink', 'text-matsu-pink');
-        }
-
-        // Utility: Copy Code
-        function copyCode(elementId) {
-            const codeContent = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(codeContent).then(() => {
-                const btn = event.currentTarget;
-                const originalText = btn.innerText;
-                btn.innerText = '已複製!';
-                btn.classList.add('bg-green-600');
-                btn.classList.remove('bg-gray-700', 'hover:bg-matsu-pink');
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('bg-green-600');
-                    btn.classList.add('bg-gray-700', 'hover:bg-matsu-pink');
-                }, 2000);
-            });
-        }
-
-        // --- Smart Home Interactions (Mock) ---
-        function toggleDevice(device) {
-            const isChecked = document.getElementById('toggle-' + device).checked;
-            if (device === 'light') {
-                document.getElementById('icon-light').innerText = isChecked ? '💡' : '🌑';
-                addChatMessage('AI', isChecked ? '主照明已順應為您開啟，帶來滿室庇佑暖光。' : '主照明已關閉，祝您好眠。');
-            }
-        }
-
-        let acTemp = 24;
-        function adjustTemp(change) {
-            acTemp += change;
-            document.getElementById('ac-temp').innerText = acTemp;
-            addChatMessage('AI', `空調已透過 Matter 協定精準設定為 ${acTemp}°C。`);
-        }
-
-        function generateOTP() {
-            const btn = event.currentTarget;
-            btn.innerText = "藍牙連線中...";
-            setTimeout(() => {
-                const otp = Math.floor(100000 + Math.random() * 900000);
-                document.getElementById('otp-code').innerText = otp;
-                btn.innerText = "密碼已產生";
-                addChatMessage('AI', `門鎖專屬密碼已產生: ${otp}，願您出入平安，退房後密碼將自動失效。`);
-            }, 800);
-        }
-
-        // --- AI Chat Interactions (Mock) ---
-        function handleChat(e) {
-            if (e.key === 'Enter') sendMsg();
-        }
-
-        function quickReply(text) {
-            document.getElementById('chat-input').value = text;
-            sendMsg();
-        }
-
-        function sendMsg() {
-            const input = document.getElementById('chat-input');
-            const msg = input.value.trim();
-            if (!msg) return;
-
-            addChatMessage('User', msg);
-            input.value = '';
-
-            // Mock AI NLP parsing with Mazu theme flavor
-            setTimeout(() => {
-                if (msg.includes('燈') || msg.includes('亮') || msg.includes('照明')) {
-                    document.getElementById('toggle-light').checked = true;
-                    toggleDevice('light');
-                } else if (msg.includes('冷') || msg.includes('熱') || msg.includes('溫度')) {
-                    addChatMessage('AI', '收到。已幫您將空調設定至最舒適的溫度，如粉紅超跑般隨時為您送上溫暖與涼爽。');
-                } else if (msg.includes('採蓮曲') || msg.includes('長恨歌') || msg.includes('預訂')) {
-                    addChatMessage('AI', '馬上為您查詢蘊含字體美學的主題房空房狀況，請稍候... 該房型本週末尚有緣份空房，需要幫您跳轉至結帳頁面嗎？');
-                } else {
-                    addChatMessage('AI', '收到您的需求。易居管家隨時順應您的需要，為您服務。');
-                }
-            }, 1000);
-        }
-
-        function addChatMessage(sender, text) {
-            const window = document.getElementById('chat-window');
-            const div = document.createElement('div');
-
-            if (sender === 'User') {
-                div.className = "flex items-end justify-end mt-4";
-                div.innerHTML = `<div class="bg-matsu-pink text-white p-3 rounded-2xl rounded-tr-none max-w-[80%] text-sm shadow-md leading-relaxed">${text}</div>`;
-            } else {
-                div.className = "flex items-start mt-4";
-                div.innerHTML = `<div class="bg-white border border-gray-200 p-3 rounded-2xl rounded-tl-none max-w-[80%] text-sm text-gray-700 shadow-sm leading-relaxed">${text}</div>`;
-            }
-
-            window.appendChild(div);
-            window.scrollTop = window.scrollHeight; // Auto-scroll to bottom
-        }
-
-        updateFestivalCountdown();
-        setInterval(updateFestivalCountdown, 1000);
-    </script>
+      const saved = localStorage.getItem("yihouse_spa_theme");
+      applyTheme(order.includes(saved) ? saved : "theme-vivir");
+    })();
+  </script>
 </body>
-
 </html>
